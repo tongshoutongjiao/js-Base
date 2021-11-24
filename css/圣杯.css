@@ -1,0 +1,51 @@
+.wrap {
+    padding: 0 200px 0 300px;
+}
+
+.wrap::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.main,
+.left,
+.right {
+    float: left;
+    height: 100px;
+}
+
+.main {
+    width: 100%;
+    background-color: red;
+}
+
+.left {
+    width: 300px;
+    position: relative;
+    left: -300px;
+    margin-left: -100%;
+    background: green;
+}
+
+.right {
+    width: 200px;
+    position: relative;
+    right: -200px;
+    margin-left: -200px;
+    background: blue;
+}
+
+@media only screen and (max-width: 1000px) {
+    .wrap{
+        padding:0;
+    }
+    .left{
+        left:0;
+        margin-left:0;
+    }
+    .right{
+        margin-left:0;
+        right:0;
+    }
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>
+        比较常用的数组方法有 push、pop、slice、map 和 reduce 等。上一讲我带你剖析了 sort 方法以及 V8 源码中关于排序的内容
+    </h2>
+    <div>
+        <p>1 reduce 方法里面的参数都是什么作用？</p>
+        <p> 2 push 和 pop 的底层逻辑是什么样的呢？</p>
+
+    </div>
+    <script>
+        // push 方法
+        Array.prototype.push = function (...items) {
+            console.log(items);
+            let O = Object(this);
+
+            //  转化为32浮点数
+            let len = this.length >>> 0;
+            let argCount = items.length >>> 0;
+
+
+            //  判断数组的总长度是否大于最大值
+            if (len + argCount > 2 ** 53 - 1) {
+                throw new TypeError("The number of array is over the max value")
+            }
+
+            //  for循环
+            for (let i = 0; i < argCount; i++) {
+                O[len + i] = items[i]
+            }
+
+            let newLength = len + argCount;
+            O.length = newLength;
+            return newLength;
+
+        };
+        let arr = [1, 2, 3, 4, 5, 6, 7];
+        arr.push(7, 8, 9, 10, 11, 12, 13, 14);
+
+        console.log(arr);
+
+        // pop方法底层实现
+        Array.prototype.pop = function () {
+            let o = Object(this);
+            let len = o.length >>> 0;
+            if (len == 0) {
+                o.length = 0
+                return undefined
+            }
+            len--;
+            let value = o[len];
+            delete o[len];
+            o.length = len;
+            return value
+        }
+
+        arr.pop();
+        console.log(arr)
+
+        // map 底层方法实现
+        Array.prototype.map = function (callbackfn, thisArg) {
+            console.log('查看数组映射');
+
+            // 当给null或者undefined 赋值时
+            if (this === null || this === undefined) {
+                throw new TypeError("Cannot read property 'map' of null")
+            }
+
+            //  当回调函数的类型是Fn时
+            if (Object.prototype.toString.call(callbackfn) !== "[object Function]") {
+                throw new TypeError(callbackfn + 'is not a function')
+            }
+
+
+            // 对象化当前函数
+            let o = Object(this);
+
+
+            // 讲当前参数保留
+            let T = thisArg
+
+
+            //  获取当前数组的长度
+            let len = this.length >>> 0
+
+
+            // 新建一个和所传数组长度一样的数组
+            let A = new Array(len)
+
+
+            // 使用for循环遍历数组中的每一项
+            for (let k = 0; k < len; k++) {
+                if (k in o) {
+                    let kValue = o[k];
+                    let newValue = callbackfn.call(T, kValue, k, o)
+                    A[k] = newValue
+                }
+            }
+
+
+            // 返回执行之后的最新函数
+            return A;
+
+        }
+
+        //  reduce 底层实现
+        Array.prototype.reduce = function (callbackfn, initialValue) {
+
+            // 异常处理，和 map 类似
+            if (this === null || this === undefined) {
+                throw new TypeError("Cannot read property 'reduce' of null");
+            }
+            // 处理回调类型异常
+            if (Object.prototype.toString.call(callbackfn) != "[object Function]") {
+                throw new TypeError(callbackfn + ' is not a function')
+            }
+
+            let O = Object(this);
+            let len = O.length >>> 0;
+            let k = 0;
+            let accumulator = initialValue; // reduce方法第二个参数作为累加器的初始值
+            if (accumulator === undefined) {
+                throw new Error('Each element of the array is empty');
+                // 初始值不传的处理
+                for (; k < len; k++) {
+                    if (k in O) {
+                        accumulator = O[k];
+                        k++;
+                        break;
+                    }
+                }
+            }
+            for (; k < len; k++) {
+                if (k in O) {
+                    // 注意 reduce 的核心累加器
+                    accumulator = callbackfn.call(undefined, accumulator, O[k], O);
+                }
+            }
+            return accumulator;
+        }
+
+        console.log('执行当前函数');
+        console.log(arr)
+
+
+        let acc=arr.reduce(function(prev,cur){
+            return prev+cur
+        },1)
+
+        console.log('reduce 的执行结果');
+        console.log(acc);
+    </script>
+</body>
+
+</html>

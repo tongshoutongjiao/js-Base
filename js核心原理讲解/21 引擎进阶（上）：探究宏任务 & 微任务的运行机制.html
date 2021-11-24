@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引擎进阶（上）：探究宏任务 & 微任务的运行机制</title>
+</head>
+
+<body>
+    <div>
+        不知道你是否还记得在第 19 讲中，我对 Eventloop 的知识进行了讲解，其中对宏任务和微任务做了简单的铺垫，那么这一讲我们就来深挖一下它背后蕴含的原理。
+
+        我会先带你分析宏任务和微任务的运行机制，并针对你日常开发中遇到的各种宏任务&微任务的方法，结合一些例子来看看代码运行的顺序逻辑，帮你把这部分知识点重新归纳和梳理。
+
+        在日常开发中，例如 setTimeout 和 promise 都是经常会使用到的 JS 方法。当这些方法变多了之后，再结合 JS
+        的异步编程代码混合使用，最终的执行顺序也经常会让开发者迷惑，因此要把这些问题搞清楚，这部分你还是有必要好好学习一下。
+
+        在课程开始前请你先思考一下：
+
+        宏任务和微任务分别有哪些方法？
+
+        宏任务和微任务互相嵌套，执行顺序是什么样的？
+
+    </div>
+    <div>
+        代码执行顺序（一）
+
+    </div>
+    <div>微任务队列
+        <p>那么微任务是怎么产生的呢？在现代浏览器里面，产生微任务有两种方式。
+
+        </p>
+        <p>
+            1 使用 MutationObserver 监控某个 DOM 节点，或者为这个节点添加、删除部分子节点，当 DOM 节点发生变化时，就会产生 DOM 变化记录的微任务。
+
+            2 使用 Promise，当调用 Promise.resolve() 或者 Promise.reject() 的时候，也会产生微任务。
+        </p>
+    </div>
+    <script>
+
+    </script>
+
+</body>
+
+</html>

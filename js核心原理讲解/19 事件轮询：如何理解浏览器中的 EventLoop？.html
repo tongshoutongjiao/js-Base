@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件轮询：如何理解浏览器中的 EventLoop？</title>
+</head>
+
+<body>
+    <div>
+        我会先讲解浏览器端的 Eventloop 的运行机制，待你对浏览器端有了一定的理解之后，再带你设计一些 Node.js 的 Eventloop 的底层逻辑。你可以发现，无论是浏览器端还是服务端，都在使用
+        Eventloop，虽然两者机制不同，但都利用了 JavaScript 语言的单线程和非阻塞的特点。希望你能扎实地掌握这部分内容，因为这对你在工作中编写高性能的 JavaScript 代码有所帮助。
+
+
+    </div>
+    <h2>
+       1 浏览器端的 Eventloop 起到了什么作用？ <br>
+
+        Node.js 服务端的 Eventloop 的作用又表现在哪？<br>
+
+    </h2>
+    <h3>
+        浏览器的 Eventloop
+        <div>
+            Eventloop 是 JavaScript 引擎异步编程背后需要特别关注的知识点。JS 在单线程上执行所有操作，虽然是单线程，但是能够高效地解决问题，并能给我们带来一种“多线程”的错觉，这其实是通过使用一些比较合理的数据结构来达到此效果的。我们一起来看下 JavaScript 引擎背后都有哪些东西在同时运转。
+        </div>
+        <div>
+            那么看完了 JS 引擎的全局流程图，我们再看看 Eventloop 的内部都有哪些东西呢？简单来说 Eventloop 通过内部两个队列来实现 Event Queue 放进来的异步任务。以 setTimeout 为代表的任务被称为宏任务，放到宏任务队列（macrotask queue）中；而以 Promise 为代表的任务被称为微任务，放到微任务队列（microtask queue）中。我们来看一下日常工作中经常遇到的哪些是宏任务，哪些是微任务，如下所示。
+
+
+        </div>
+
+
+    </h3>
+
+</body>
+
+</html>

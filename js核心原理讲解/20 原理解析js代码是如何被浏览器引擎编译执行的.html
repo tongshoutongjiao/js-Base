@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 代码是如何被浏览器引擎编译、执行的</title>
+</head>
+<body>
+    <div>
+        上一讲我们讨论了 JavaScript 引擎的 Eventloop 相关内容，今天我们来看看浏览器引擎是如何编译、执行 JS 代码的，目的是帮你深入理解浏览器引擎所做的工作。
+        <p>
+            本讲我先带你分析浏览器引擎对 JS 代码的编译情况，并结合你日常的 JavaScript 开发经验，一起重新理解底层的编译解析机制。对其底层原理的理解，将有助于你理解前端的跨端应用，以及一套代码生成多种小程序相关框架的底层逻辑。
+
+
+        </p>
+        <p>那么，在课程开始前请你先思考：
+
+            <span>JavaScript 代码被执行分为哪几个阶段？</span>
+            <span>AST 到底是做什么用的？ </span>
+        </p>
+    </div>
+    <div>
+        <h2>  V8引擎</h2>
+        <div>编译型语言的特点是在代码运行前编译器直接将对应的代码转换成机器码，运行时不需要再重新翻译，直接可以使用编译后的结果。
+        </div>
+        <div>
+            解释型语言也是需要将代码转换成机器码，但是和编译型的区别在于运行时需要转换。比较显著的特点是，解释型语言的执行速度要慢于编译型语言，因为解释型语言每次执行都需要把源码转换一次才能执行。
+        </div>
+
+        <div>
+            js v8引擎讲js代码抽象成语法数
+            解释器将语法树解释成字节码，
+            编译器将字节码编译成机器码
+            垃圾回收机制，将程序中不再使用的内存空间进行垃圾回收机制
+        </div>
+      
+
+    </div>
+
+    
+</body>
+</html>

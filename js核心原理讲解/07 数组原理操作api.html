@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>
+        <p>数组的构造器有哪几种？</p>   
+        <p>哪些是改变自身的方法?</p>
+        <p>哪些是不改变自身的方法？ </p>
+        <p>遍历的方法有哪些？        </p>
+    </h2>
+    <script type="text/javascript">
+    console.log('查看逻辑信息');
+    // 1 字面量方式
+    let a=[1,2,3,4,5];
+
+    // 2 构造函数
+    let b=new Array(1,2,3);
+
+    // 
+
+    console.log(a,b);
+
+    // Array.of Array.from 类数组转数组
+
+
+    // 判断是否是数组的方法
+    // var a = [];
+// 1.基于instanceof
+a instanceof Array;
+// 2.基于constructor
+a.constructor === Array;
+// 3.基于Object.prototype.isPrototypeOf
+Array.prototype.isPrototypeOf(a);
+// 4.基于getPrototypeOf
+Object.getPrototypeOf(a) === Array.prototype;
+// 5.基于Object.prototype.toString
+Object.prototype.toString.apply(a) === '[object Array]';
+
+//  isArray
+
+    // 数组的方法
+    // push pop unshift shift slice splice forEach concat reverse map reduce some every from isArray
+
+    // 改变自身 push pop unshift shift  sort splice reverse copyWithin fill
+
+    // 不改变自身的方法 concat、join、slice、toString、toLocaleString、indexOf、lastIndexOf、未形成标准的 toSource，以及 ES7 新增的方法 includes
+
+//     给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+// 输入:
+let nums1 = [1,2,3,0,0,0];
+let  m = 3;
+let nums2 = [2,5,6];
+let  n = 3;
+// 输出: [1,2,2,3,5,6]
+
+//  将两个数组合并成一个有序数组 巧妙地利用数组的 API 中的 splice、push、sort 这三个方法
+    function getSortArray(nums2,nums1,m,n){
+
+        nums1.splice(m)
+        nums2.splice(n);
+        nums1.push(...nums2);
+      return  nums1.sort((a,b)=>{
+            return a-b
+
+        })
+       
+        
+
+    }
+   let array= getSortArray(nums2,nums1,m,n);
+   console.log(array)
+
+
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>垃圾回收机制</title>
+</head>
+
+<body>
+    <div>
+        释放内存，提升浏览器页面性能
+    </div>
+    <h2>
+        这一讲主要通过讲解 JS 引擎底层的垃圾回收机制，希望帮助你了解更多的浏览器内核层面的东西，从而对 JS 的内存管理以及内存溢出等形成一定的认识。
+    </h2>
+    <div>
+        你知道 JavaScript 的内存是怎么管理的吗？Chrome 浏览器又是如何进行垃圾回收的？
+    </div>
+    <div>
+        <h5>javascript 的内存管理</h5>
+        <div>
+            不管是什么样的计算机程序语言，运行在对应的代码引擎上，对应的使用内存过程大致逻辑是一样的，可以分为这三个步骤：<br>
+
+            分配你所需要的系统内存空间；<br>
+
+            使用分配到的内存进行读或者写等操作；<br>
+
+            不需要使用内存时，将其空间释放或者归还。<br>
+        </div>
+    </div>
+    <div>
+        <h4>内存泄漏与优化 </h4>
+        平常用 JavaScript 开发代码，内存的泄漏和优化是应该经常留意的。内存泄漏是指 JavaScript
+        中，已经分配堆内存地址的对象由于长时间未释放或者无法释放，造成了长期占用内存，使内存浪费，最终会导致运行的应用响应速度变慢以及最终崩溃的情况。这种就是内存泄漏，你应该在日常开发和使用浏览器过程中也遇到过，那么我们来回顾一下内存泄漏的场景：
+        1 过多的缓存未释放；<br>
+
+        2 闭包太多未释放；<br>
+
+        3 定时器或者回调太多未释放；<br>
+
+        4 太多无效的 DOM 未释放；<br>
+
+        5 全局变量太多未被发现。<br>
+
+
+
+    </div>
+    <script>
+
+    </script>
+
+</body>
+
+</html>

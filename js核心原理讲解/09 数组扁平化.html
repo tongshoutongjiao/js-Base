@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>
+        <p>实现数组扁平化的六种方式？</p>
+        <p>
+            1. 怎样用最普通的方法解决数组扁平化问题？
+
+            2. ES6 里面是否有一些高级的方法能够直接实现？
+        </p>
+        <p>何为数组扁平化?</p>
+        <p>数组的扁平化其实就是将一个嵌套多层的数组 array（嵌套可以是任何层数）转换为只有一层的数组。</p>
+    </h2>
+    <script>
+        console.log('数组扁平化操作')
+        // 下面开始说说什么是数组扁平化，如何实现它呢？
+        // 方法一：普通的递归实现
+        // var a = [1, [2, [3, 4, 5]]];
+
+        // function flatten(arr) {
+        //     let result = [];
+        //     for (let i = 0; i < arr.length; i++) {
+        //         if (Array.isArray(arr[i])) {
+        //             result = result.concat(flatten(arr[i]));
+        //         } else {
+        //             result.push(arr[i]);
+        //         }
+        //     }
+        //     return result;
+        // }
+        // flatten(a); //  [1, 2, 3, 4，5]
+
+        // 利用reduce 函数迭代
+        // var arr = [1, [2,[3,4,5]]];
+
+        // function flatten(arr) {
+        //   return arr.reduce((prev,next)=>{
+        //      return prev.concat(Array.isArray(next)?flatten(next):next) 
+        //   },[])
+        // }
+        // console.log(flatten(arr)); //  [1, 2, 3, 4，5]
+
+        // 方法三：扩展运算符实现
+        // 这个方法的实现，采用了扩展运算符和 some 的方法，两者共同使用，达到数组扁平化的目的，还是来看一下代码。
+
+        // var arr = [1, [2, [3, 4]]];
+
+        // function flatten(arr) {
+        //     while (arr.some((item) => Array.isArray(item))) {
+        //         arr = [].concat(...arr)
+        //     }
+        //     return arr
+
+        // }
+        // console.log(flatten(arr)); //  [1, 2, 3, 4，5]
+
+        // 方法四：split 和 toString 共同处理
+
+        // var arr = [1, [2, [3, 4]]];
+
+        // function flatten(arr) {
+        //     console.log(arr.toString())
+        //     return arr.toString().split(',');
+        // }
+        // console.log(flatten(arr)); //  [1, 2, 3, 4]
+
+        //  方法五:调用 ES6 中的 flat
+        // var arr = [1, [2, [3, 4]]];
+
+        // function flatten(arr) {
+        //     return arr.flat(Infinity);
+        // }
+        // console.log(flatten(arr));
+
+        // 方法六：正则和 JSON 方法共同处理
+        let arr = [1, [2, [3, [4, 5]]], 6];
+
+        function flatten(arr) {
+            let str = JSON.stringify(arr);
+            str = str.replace(/(\[|\])/g, '');
+
+            console.log('查看替代之后的元素');
+            console.log(str);
+            str = '[' + str + ']';
+            return JSON.parse(str);
+        }
+        console.log(flatten(arr)); //  [1, 2, 3, 4，5]
+
+    </script>
+
+</body>
+
+</html>

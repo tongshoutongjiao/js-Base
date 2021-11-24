@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>实现一个可以不断累加的函数</div>
+    <script>
+        //  需求：编写一个函数，实现不断累加效果
+
+        // function add() {
+        //     let sum = 0;
+
+        //     let arr = [...arguments];
+        //     sum = arr.reduce((prev, cur) => {
+        //         return prev + cur
+        //     }, 0)
+
+        //     console.log('查看结果');
+        //     console.log(sum);
+
+        //     return sum;
+
+
+        // }
+
+        // add(1);
+        // add(1, 2);
+        // add(1, 2, 3);
+        // add(1, 2, 3, 4);
+        // add(1, 2, 3, 4, 5);
+        // add(1, 2, 3, 4, 5, 6)
+
+        // function add2() {
+        //     let arr = [...arguments];
+
+        //     function fn(...newArgs) {
+        //         arr = [...arr, ...newArgs]
+        //         return fn;
+        //     }
+
+        //     fn.toString = fn.valueOf = function () {
+        //         return arr.reduce((prev, cur) => prev + parseInt(cur))
+        //     }
+        //     return fn
+
+        // }
+
+        // // add2(1)(2)
+        // // add2(2)(3)
+        // var SingleStudent = (function () {
+        //     function Student() {}
+        //     var _student;
+        //     return function () {
+        //         if (_student) return _student;
+        //         _student = new Student()
+        //         return _student;
+        //     }
+        // }())
+        // var s = new SingleStudent()
+        // var s2 = new SingleStudent()
+        // s === s2 // true
+
+
+        // 异步函数：从零秒开始，每次增加500ms
+
+        // const arr = [1, 2, 3, 4, 5];
+
+
+        // arr.reduce(async (prev, cur, index) => {
+
+        //     let res = await prev;
+        //     const time = index === 0 ? 0 : 1000 + (index - 1) * 500;
+
+        //     console.log('res', res)
+
+        //     return new Promise((res) => {
+        //         setTimeout(() => {
+        //             console.log(time, cur);
+        //             res(time)
+        //         }, time)
+        //     })
+        // }, Promise.resolve(0))
+
+
+        function fib(n) {
+            if (n < 3) return 1
+            console.trace();
+            return fib(n - 1) + fib(n - 2)
+        }
+        fib(4)
+    </script>
+
+</body>
+
+</html>

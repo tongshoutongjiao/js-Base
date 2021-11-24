@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.box{
+  
+    background: lightcoral;
+    --tab-size:calc(var(--tab-count)*-100%);
+    font-size:var(--tab-size);
+    line-height: var((--tab-size+8)px);
+    letter-spacing:var((--tab-size/20)px)
+
+}
+.compare{
+    font-size: 16px;
+    line-height: 32px;
+    height:calc(100px);
+}

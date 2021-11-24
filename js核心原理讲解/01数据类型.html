@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  数据类型 ：概念 检测方法 转换方法
+        // Number String undefined null Boolean  Symbol BigInt
+        //  Object 包括 Array Function   Math Regexp object Date
+        // 基础类型 栈内存 引用 拷贝 创建一个相同的变量
+        // 引用类型 堆内存
+
+        // 1 typeof
+        // 检测 typeof 只能检测基础的 不能检测引用类型的  记着function 为function 其他都为object
+        //         typeof 1 // 'number'
+        // typeof '1'  'string'
+        // typeof undefined  'undefined'
+        // typeof true  'boolean'
+        // typeof Symbol()  'symbol'
+        // typeof null  'object'
+        // typeof []  'object'
+        // typeof {}  'object'
+        // typeof console  'object'
+        // typeof console.log  'function'
+
+        // 2 instanceof
+        //  判断是否是某个函数的实例 手动实现 instanceof 
+
+
+        //   根据constructor 来判断
+        function isInstance(left, right) {
+            console.log('判断是否是实例')
+            if (typeof left !== Object || left === null) return false;
+            // getProtypeOf是Object对象自带的API，能够拿到参数的原型对象
+            let proto = Object.getPrototypeOf(left);
+
+            while (true) { //循环往下寻找，直到找到相同的原型对象
+                if (proto === null) return false;
+                if (proto === right.prototype) return true; //找到相同原型对象，返回true
+                proto = Object.getPrototypeof(proto);
+            }
+        }
+
+
+        //  instanceof 和typeof的差异
+        // instanceof 可以准确地判断复杂引用数据类型，但是不能正确判断基础数据类型；
+        // 而 typeof 也存在弊端，它虽然可以判断基础数据类型（null 除外），但是引用数据类型中，除了 function 类型以外，其他的也无法判断。
+
+        // Object.prototype.toString
+
+        function getType(obj) {
+            let type = typeof obj;
+            if (type !== "object") { // 先进行typeof判断，如果是基础数据类型，直接返回
+                return type;
+            }
+            // 对于typeof返回结果是object的，再进行如下的判断，正则返回结果
+            return Object.prototype.toString.call(obj).replace(/^\[object (\S+)\]$/, '$1'); // 注意正则中间有个空格
+        }
+
+        //  
+
+
+    </script>
+
+</body>
+
+</html>
