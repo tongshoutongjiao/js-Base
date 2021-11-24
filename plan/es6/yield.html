@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yield 是个啥</title>
+</head>
+<body>
+<div>yield 是个啥 放弃执行？
+</div>
+<div>
+    yield 传参
+    <br>
+    返回
+
+
+
+
+
+</div>
+
+
+<script type="text/javascript">
+    function  *show() {
+        alert('a');
+      let a=  yield ;
+      console.log(a);
+        alert('b');
+        alert(a);
+
+    }
+    let gen=show();
+    gen.next('12');
+    gen.next('5');
+
+</script>
+
+</body>
+</html>

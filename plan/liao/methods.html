@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Methods</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 'use strict';
+    //
+    // var count = 0;
+    // var oldParseInt = parseInt; // 保存原函数
+    //
+    // window.parseInt = function () {
+    //     count += 1;
+    //     return oldParseInt.apply(null, arguments);
+    // }// 调用原函数 ;
+    //
+    // parseInt('10');
+    // parseInt('20');
+    // parseInt('30');
+    // console.log('count = ' + count); // 3
+
+    function add(x, y) {
+        return x + y;
+    }
+
+    function pddq(a, b) {
+        return a + b;
+    }
+
+    pddq(1, add(2, 3));
+
+
+    let arr=[{item:1},{item:3}];
+    arr.forEach(function (item,index) {
+        item.item=item.item*2;
+        console.log(item,index)
+    });
+    let newArr=arr.map(function (item,index) {
+       return item.item+1;
+    })
+    console.log(arr);
+    console.log(newArr)
+
+
+
+
+</script>
+
+</body>
+</html>

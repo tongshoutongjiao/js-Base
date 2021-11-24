@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM 测试</title>
+</head>
+<body>
+<ul id="todo-app">
+    <li class="item"> Walk the dog</li>
+    <li class="item"> Pay bills</li>
+    <li class="item"> Make dinner</li>
+    <li class="item"> Code for on hour</li>
+
+</ul>
+<script type="text/javascript">
+    window.onload=function(){
+        console.log('window onload')
+
+    //     编写一个函数，该函数将遍历整数列表，并在延迟3秒后打印每个元素的索引
+
+    //
+    //     let arr=[10,12,14,16];
+    //
+    //     function demoFn(arr) {
+    //         arr.forEach((item,index)=>{
+    //             console.log(item,index);
+    //         })
+    //     }
+    //
+    //     demoFn(arr)
+    //     const arr = [10, 12, 15, 21];
+    //     for (let i = 0; i < arr.length; i++) {
+    //         setTimeout(function() {
+    //             console.log('The index of this number is: ' + i);
+    //         }, 3000);
+    //     }
+        const arr = [10, 12, 15, 21];
+
+        for (var i = 0; i < arr.length; i++) {
+            setTimeout(function(i_local){
+                return function () {
+                    console.log('The index fix of this number is: ' + i_local);
+                }
+            }(i), 3000)
+        }
+
+
+
+
+
+
+    }
+
+    // 方法一
+    // document.addEventListener('DOMContentLoaded',function () {
+    //
+    //     console.log('document ready ')
+    //     let app=document.getElementById('todo-app');
+    //     let itemList=app.getElementsByClassName('item');
+    //
+    //     for(let item of itemList){
+    //         item.addEventListener('click',function () {
+    //             alert('you clicked on item'+ item.innerHTML)
+    //
+    //         })
+    //     }
+    //
+    // })
+
+    // 方法二
+    document.addEventListener('DOMContentLoaded',function () {
+
+        console.log('document ready ')
+        let app=document.getElementById('todo-app');
+
+        app.addEventListener('click',function (e) {
+
+            console.log('事件源')
+            console.log(e)
+            if(e.target&&e.target.nodeName==='LI'){
+                console.log('方法二')
+                let item=e.target;
+                alert('you clicked on item'+ item.innerHTML)
+
+            }
+
+        })
+
+
+    })
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

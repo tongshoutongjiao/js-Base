@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="c1" width="800" height="600" >
+    您的浏览器不支持canvas，请 <a href="https://www.baidu.com"></a>
+</canvas>
+<script>
+    function a2d(n){
+        return n*180/Math.PI;
+    }
+    function d2a(n){
+        return n*Math.PI/180
+    }
+
+
+
+    window.onload=function () {
+        let oC=document.getElementById('c1');
+        let gd=oC.getContext('2d');// 图形上下文
+
+        let cx=400,cy=300,r=150;
+
+        function pie(startAng,endAng,color) {
+            gd.beginPath();
+            gd.moveTo(cx,cy);
+            let x=cx+Math.sin(d2a(startAng))*r;
+            let y=cy-Math.cos(d2a(startAng))*r;
+            gd.lineTo(x,y);
+            gd.arc(cx,cy,r,d2a(startAng-90),d2a(endAng-90),false);
+            gd.closePath();
+            gd.fillStyle=color;
+            gd.fill();
+            gd.stroke();
+        }
+
+
+
+
+        //    1 数据
+        let data=[581,300,150,201];
+        let colors=['#CF0','#C0F','#C0C','#0CF']
+        console.log(data)
+
+
+        //    2 综合
+
+        let sum=data.reduce((tmp,item,index)=>tmp+item);
+
+
+
+
+        //    数据占比-》角度占比
+        let angs= data.map(item=>360*item/sum)
+
+        //    统一以上pie 的结束叫作为下一个pie的开始
+        let last=0;
+        angs.forEach((ang,index)=>{
+            pie(last,last+ang,colors[index]);
+            last+=ang;
+
+        })
+
+
+
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promise2</title>
+</head>
+
+<body>
+    <script>
+        console.log('手写promise2');
+
+        function getRandom(m, n) {
+            return Math.floor(Math.random() * (n - m)) + m;
+        }
+
+        let p = new Promise(function(res, rej) {
+            setTimeout(function() {
+                let val = getRandom(5, 10)
+                if (val > 7) {
+                    res({
+                        code: 200,
+                        message: '成功'
+                    })
+
+                } else {
+                    rej({
+                        code: 400,
+                        message: '你要找的数据不存在'
+                    })
+
+                }
+
+            }, 1000)
+
+        })
+
+        let b = new Promise(function(res, res) {
+            setTimeout(() => {
+                res({
+                    code: '200',
+                    message: 'b函数执行成功'
+                })
+            }, 2000)
+        })
+
+        p.then({
+            name: 'obj',
+            age: 30
+        }).then((val) => {
+            console.log('valh哈哈哈');
+            console.log(val);
+            return b;
+        })
+
+
+
+        console.log(p)
+    </script>
+
+</body>
+
+</html>

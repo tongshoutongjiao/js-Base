@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>generator 函数</title>
+</head>
+<body>
+<script type="text/javascript">
+    'use strict'
+    function* next_id() {
+        let num=1;
+        while (true) {
+            yield num++;
+        }
+    }
+    // let fn=next_id();
+    // console.log(fn);
+    // console.log('fn之后的函数');
+
+
+    // 测试:
+    let x,
+        pass = true,
+        g = next_id();
+    for (x = 1; x < 100; x++) {
+        if (g.next().value !== x) {
+            pass = false;
+            console.log(g.next())
+            console.log('测试失败!');
+            break;
+        }
+    }
+    if (pass) {
+        console.log(x);
+        console.log(g.next());
+        console.log('测试通过!');
+    }
+
+</script>
+
+</body>
+</html>

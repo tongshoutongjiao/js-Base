@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>generator</title>
+</head>
+<body>
+<div>generator 生成器</div>
+<div>
+    普通函数：一路走到底（飞机火车）
+    generator: 中间能停（出租车）
+    踹一脚走一步
+
+
+</div>
+
+
+<script type="text/javascript">
+
+
+    function *show() {
+        alert('a');
+
+        yield ;
+        alert('b')
+
+    }
+    let generatorObj=show();
+
+    generatorObj.next();
+    generatorObj.next();
+
+
+    console.log(generatorObj);
+
+
+
+
+</script>
+
+
+</body>
+</html>

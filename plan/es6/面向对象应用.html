@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象应用</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+
+</head>
+<body>
+<div>面向对象 --React</div>
+<div>
+    React 组件化 class
+    <br>
+    JSX==babel==browers
+
+    jsx 是js 扩展版本
+
+</div>
+<div id="div1">
+
+</div>
+<script type="text/babel">
+
+    class Test extends React.Component{
+        constructor(...args){
+            super(...args);
+        }
+
+        render(){
+            return <span>{this.props.str}</span>;
+        }
+
+    }
+
+
+
+    window.onload=function () {
+        let oDiv=document.getElementById('div1');
+        console.log(oDiv);
+
+        ReactDOM.render(
+            <ul>
+                <Test str="abc"></Test>
+                <Test str="ddd"></Test>
+                <Test str="eee"></Test>
+            </ul>,
+            oDiv
+        )
+    }
+
+
+
+
+</script>
+
+</body>
+</html>

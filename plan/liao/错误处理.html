@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>错误处理</title>
+</head>
+<body>
+<div>错误处理</div>
+<script type="text/javascript">
+    // let r1, r2, s = null;
+    // try {
+    //     r1 = s.length; // 此处应产生错误
+    //     r2 = 100; // 该语句不会执行
+    // } catch (e) {
+    //     console.log('出错了：' + e);
+    //     throw new Error('出错啦! '+e)
+    // } finally {
+    //     console.log('finally');
+    // }
+    // console.log('r1 = ' + r1); // r1应为undefined
+    // console.log('r2 = ' + r2); // r2应为undefined
+
+
+    // var r, n, s;
+    // try {
+    //     s = prompt('请输入一个数字');
+    //     n = parseInt(s);
+    //     if (isNaN(n)) {
+    //         console.log('gegeuu ')
+    //         throw new Error('输入错误');
+    //     }
+    //     // 计算平方:
+    //     r = n * n;
+    //     console.log(n + ' * ' + n + ' = ' + r);
+    // } catch (e) {
+    //     console.log('出错了：' + e);
+    //     throw  new Error('出错啦',e);
+    // }
+
+
+    function main(s) {
+        console.log('BEGIN main()');
+        try {
+            foo(s);
+        } catch (e) {
+            console.log('出错了：' + e);
+        }
+        console.log('END main()');
+    }
+
+    function foo(s) {
+        console.log('BEGIN foo()');
+        bar(s);
+        console.log('END foo()');
+    }
+
+    function bar(s) {
+        console.log('BEGIN bar()');
+        console.log('length = ' + s.length);
+        console.log('END bar()');
+    }
+
+    main(null);
+
+
+
+
+</script>
+
+</body>
+</html>

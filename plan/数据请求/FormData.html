@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>formData</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./form.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <input type="button" value="ajax" id="bt1"/>
+
+        
+        <script >
+            window.onload=function(){
+                let oBtn=document.getElementById('bt1');
+                oBtn.onclick=function(){
+
+                    console.log('hahahh ')
+
+                    let xhr=new XMLHttpRequest();
+
+                    xhr.open('get','http://localhost:8090',true);
+                    // if(xhr.upload){
+                    //     alert('ajax 2.0')
+                    // }
+                    xhr.send();
+                    xhr.onreadystatechange=function(){
+
+                        console.log(xhr.readyState);
+                        // if(xhr.readyState==4){
+
+                        //     if((xhr.status>=200&&xhr.status<=300)||xhr.status==='304'){
+                        //         console.log(xhr.status)
+                        //     }else{
+                        //     alert('错了');
+                        //    }
+                        // }
+
+                    }
+
+
+
+                }
+
+
+
+               
+
+
+            }
+
+
+        
+        
+        
+        
+        </script>
+    </body>
+</html>

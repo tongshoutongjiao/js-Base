@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my express</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+<!--    输入框区域-->
+    <div style="height: 50px;">
+        <input type="text" placeholder="请输入电话号码" v-model="phoneNum">
+        <button @click="getFaceResult">确定</button>
+    </div>
+<!--    充值界面，显示区域-->
+    <div>
+        充值面值
+        <span v-for="item in faceList">
+            {{item}}
+        </span>
+    </div>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+            phoneNum:'12345',
+            faceList:['20元','30元','50元']
+        },
+        methods:{
+            // 获取城市信息
+            getLocation(phoneNum){
+                return axios.post('phoneLocation',{
+                    phoneNum
+                })
+
+            },
+
+            //获取面值
+            getFaceList(province,city){
+                return axios.post('/faceList',{
+                    province,
+                    city
+                })
+            },
+
+            // 点击确定按钮时，回去面值列表信息
+
+           async getFaceResult(){
+                console.log('测试测试');
+                try {
+                    let location=await this.getLocation(this.phoneNum);
+                    console.log(location);
+                    if(location.data.success){
+                        let province=location.data.obj.province;
+                        let city=location.data.obj.city;
+                        let result=await this.getFaceList(province,city);
+                        console.log(result);
+                        if(result.data.success){
+                            this.faceList=result.data.obj;
+                        }
+                    }else{
+                        console.log('点击执行所有的')
+                    }
+                    //
+                }catch(err){
+
+                    console.log('错误情况处理');
+                    console.log(err);
+
+                }
+
+
+                // this.getLocation(this.phoneNum)
+                //     .then(res => {
+                //         if (res.status === 200 && res.data.success) {
+                //             let province = res.data.obj.province;
+                //             let city = res.data.obj.city;
+                //
+                //             // 调用获取面值接口
+                //             this.getFaceList()
+                //                 .then(res => {
+                //                     if(res.status === 200 && res.data.success) {
+                //                         this.faceList = res.data.obj
+                //                     }
+                //                 })
+                //         }
+                //     })
+                //     .catch(err => {
+                //         console.log(err)
+                //     })
+
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

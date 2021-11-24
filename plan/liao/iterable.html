@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+    let arr=[1,2,3,4,5];
+    arr.name='zhl';
+    arr.age='28';
+    for(let key in arr){
+        console.log('查看每一个key值')
+        console.log(key)
+    }
+    for(let key of arr){
+        console.log('通过for..of 方式查看')
+        console.log(key)
+    }
+    let set = new Set([66, 55, 44, 33, 22]);
+    set.forEach((element,sameElement,set,set2) => {
+        console.log("element:", element, "sameElement:", sameElement, "set:", set,"set2:",set2);
+    })
+
+
+</script>
+
+
+</body>
+</html>

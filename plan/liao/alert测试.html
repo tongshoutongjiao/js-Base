@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    window.alert('我是alert 函数');
+    let old_alert=window.alert;
+    window.alert=function (err) {
+        console.log(err)
+    }
+    alert('alert 不能使用啦');
+    window.alert=old_alert;
+    alert('alert 又能使用 了')
+
+</script>
+
+</body>
+</html>

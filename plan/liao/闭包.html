@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function  lazy_sum(arr) {
+
+        let sum=function () {
+           return  arr.reduce((item,cur)=>item+cur)
+
+        }
+        return sum
+
+    }
+    let f=lazy_sum([1,2,3,4,5]);
+    console.log(f)
+
+    function count() {
+        let array=[];
+        for(let i=0;i<=3;i++){
+            array.push(function () {
+                return i*i;
+            })
+        }
+        return array;
+        
+    }
+    let result=count();
+    console.log(result);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json</title>
+</head>
+<body>
+<div>json 标准写法 1 只能用双引号 2 所有的名字必须引号标起来
+
+    json的简写
+
+
+</div>
+
+<script type="text/javascript">
+    let json={a:12,b:5};
+    let str='http://it.kaikeba.com/path/user?data='+encodeURIComponent(JSON.stringify(json));
+    console.log(str);
+
+    let newJson='{"a":5,"b":7,"d":32}';
+    console.log(JSON.parse(newJson))
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const PENDING = 'pending';
+        const FULFILLED = 'fulfilled';
+        const REJECTED = 'rejected';
+
+        function getRandom(m, n) {
+            return Math.floor(Math.random() * (n - m)) + m;
+        }
+
+        // 自定义promise
+        function Promise(executor) {
+            let self = this;
+            self.state = PENDING;
+            self.onFulfilled = [];
+            self.onRejected = [];
+
+            function resolve(value) {
+                if (self.state == PENDING) {
+                    self.state = FULFILLED;
+                    self.value = value;
+                    self.onFulfilled.forEach((item) => item(value))
+                }
+
+            }
+
+            function reject(reason) {
+                console.log('reason');
+                // console.log(reason);
+                console.log(self.state);
+                if (self.state == PENDING) {
+                    self.state = REJECTED;
+                    self.value = reason;
+                    self.onRejected.forEach((item) => item(reason))
+                }
+
+            }
+
+
+
+            try {
+                executor(resolve, reject)
+
+            } catch (e) {
+                reject(e)
+            }
+
+        }
+
+        Promise.prototype.then = function(onFulfilled, onRejected) {
+
+            var _this = this
+            onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => {
+                console.log('查看value值');
+                console.log(value)
+
+                return value
+            }
+            onRejected = typeof onRejected === 'function' ? onRejected : reason => {
+                throw reason
+            }
+
+            let promise2 = new Promise((resolve, reject) => {
+
+                console.log('this 的状态')
+                console.log(_this);
+
+
+                if (_this.state === FULFILLED) {
+                    setTimeout(() => {
+                        try {
+                            let x = onFulfilled(_this.value)
+                            resolvePromise(promise2, x, resolve, reject)
+                        } catch (error) {
+                            new TypeError(error)
+                        }
+                    })
+                } else if (_this.state === REJECTED) {
+                    setTimeout(() => {
+                        try {
+                            let x = onRejected(_this.reason)
+                            resolvePromise(promise2, x, resolve, reject)
+                        } catch (error) {
+                            reject(error)
+                        }
+                    })
+                } else if (_this.state === PENDING) {
+                    console.log('异步执行初始态')
+                    _this.onFulfilled.push(() => {
+                        setTimeout(() => {
+                            try {
+                                let x = onFulfilled(_this.value)
+                                resolvePromise(promise2, x, resolve, reject)
+                            } catch (error) {
+                                reject(error)
+                            }
+                        })
+                    })
+                    _this.onRejected.push(() => {
+                        setTimeout(() => {
+                            try {
+                                let x = onRejected(_this.value)
+                                resolvePromise(promise2, x, resolve, reject)
+                            } catch (error) {
+                                reject(error)
+                            }
+                        })
+                    })
+                }
+
+            })
+            return promise2
+
+
+        }
+
+
+        function resolvePromise(promise2, x, resolve, reject) {
+
+            console.log('查看是否相等')
+            console.log(promise2 == x);
+
+            if (promise2 === x) {
+                console.log('呼呼呼呼')
+                console.log(reject)
+                new TypeError('Chaining cycle');
+            }
+            if (x && typeof x === 'object' || typeof x === 'function') { 
+                let used;
+                try {
+                    let then = x.then
+                    if (typeof then === 'function') {
+                        then.call(x, (y) => {
+                            if (used) return;
+                            used = true
+                            resolvePromise(promise2, y, resolve, reject)
+                        }, (r) => {
+                            if (used) return;
+                            used = true
+                            reject(r)
+                        })
+                    } else {
+                        if (used) return;
+                        used = true
+                        resolve(x)
+                    }
+                } catch (e) {
+                    if (used) return;
+                    used = true
+                    reject(e)
+                }
+            } else {
+                resolve(x)
+            }
+        }
+
+
+
+
+        let p = new Promise(function(res, rej) {
+            setTimeout(function() {
+                let val = getRandom(5, 10)
+                if (val > 5) {
+                    res({
+                        code: 200,
+                        message: '成功'
+                    })
+
+                } else {
+                    rej({
+                        code: 400,
+                        message: '你要找的数据不存在'
+                    })
+
+                }
+
+            }, 1000)
+
+        })
+
+
+        let p2 = p.then((res) => {
+            console.log('查看res函数');
+            console.log(res);
+            // 一顿操作猛如虎
+            return {
+                name: 'zhl',
+                then: function() {
+                    console.log('测试成功回调函数')
+                }
+
+            }
+
+        }, (err) => {
+            console.log('err');
+            console.log(err);
+            return p2;
+        })
+
+
+        // console.log(p)
+    </script>
+
+</body>
+
+</html>

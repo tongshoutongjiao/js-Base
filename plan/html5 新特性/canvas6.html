@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style media="screen">
+        body{
+            background: black;
+            text-align: center;
+        }
+        #c1{
+            background: white;
+
+        }
+    </style>
+</head>
+<body>
+<canvas id="c1" width="800" height="600" >
+    您的浏览器不支持canvas，请 <a href="https://www.baidu.com"></a>
+</canvas>
+<script>
+    window.onload=function () {
+        let oC=document.getElementById('c1');
+        let gd=oC.getContext('2d');// 图形上下文
+        let lastX,lastY;
+        oC.onmousedown=function (ev) {
+
+             lastX=ev.offsetX;
+             lastY=ev.offsetY;
+
+            oC.onmousemove=function (ev) {
+                gd.moveTo(lastX,lastY);
+                gd.lineTo(ev.offsetX,ev.offsetY);
+                lastX=ev.offsetX;
+                lastY=ev.offsetY;
+                gd.stroke();
+
+            }
+            oC.onmouseup=function (ev) {
+                oC.onmousemove=null;
+                oC.onmouseup=null;
+
+
+            }
+
+        }
+
+
+
+
+
+
+    }
+
+
+</script>
+</body>
+</html>

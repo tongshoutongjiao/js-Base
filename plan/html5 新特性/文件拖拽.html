@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽</title>
+    <style>
+        #div1{
+            width: 400px;
+            height:200px ;
+            background: #ccc;
+            border: 1px solid black;
+            margin: 50px auto 0;
+            text-align: center;
+            line-height: 200px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="div1">将文件拖拽至此区域
+
+</div>
+<script>
+    window.onload=function () {
+        let oDiv=document.getElementById('div1');
+    //    ondragenter
+    //    ondragleave
+    //    ondragover
+    //    ondrop 松开鼠标
+
+        // 进入
+        oDiv.ondragenter=function () {
+            oDiv.innerHTML='释放鼠标'
+            
+        }
+        // 离开
+        oDiv.ondragleave=function () {
+            oDiv.innerHTML='将文件拖拽至次无'
+        }
+
+        // 悬停
+        oDiv.ondragover=function (ev) {
+            console.log('dragOver')
+
+            ev.preventDefault();
+        }
+        oDiv.ondrop=function (ev) {
+            console.log('drop')
+            console.log(ev.dataTransfer.files)
+            ev.preventDefault();
+            let oFile=ev.dataTransfer.files[0];
+
+        //     读取
+            let reader=new FileReader();
+            console.log(reader);
+            console.log(ev.dataTransfer.files.length)
+            reader.onLoad=function(){
+                alert('成功'+this.result)
+            };
+            reader.onerror=function(){
+                alert('读取失败')
+
+            }
+
+
+            // reader.readAsText()
+
+        }
+
+
+    }
+</script>
+
+</body>
+</html>

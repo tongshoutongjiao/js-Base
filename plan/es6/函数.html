@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数</title>
+</head>
+<body>
+<div>参数扩展/展开</div>
+<div>默认参数</div>
+
+<div>
+    参数扩展：收集剩余的参数，必须是最后一个
+</div>
+<div>展开数据:展开后的效果跟直接写内容是一样的</div>
+<script>
+    function  show(a,b,...rest) {
+        console.log(a);
+        console.log(b);
+        console.log(rest);
+    }
+    show(12,15,18,16,178,78);
+
+
+</script>
+</body>
+
+</html>

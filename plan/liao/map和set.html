@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map和set</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var m=new Map([['Micheal',78],['Bob',94],['Tracy',89]]);
+    console.log(m);
+    let score=m.get('Bob');
+    console.log('Bob的分数是'+score);
+
+    let s=new Map();
+    s.set('ZHL',29);
+    s.set('SYT',37)
+    s.has('SYT');
+    s.set('SXL',89)
+    s.delete('SXL');
+
+    let S1=new Set();
+    let S2=new Set([1,2,3,'3',3,2,'1']);
+    S2.add(5)
+    console.log('查看set2')
+    console.log(S2);
+    for(let key of S2){
+        console.log(key)
+    }
+    console.log('你的浏览器支持for...of')
+
+
+</script>
+
+</body>
+</html>
