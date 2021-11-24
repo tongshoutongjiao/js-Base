@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- meta标签的用法  10秒钟之后跳转-->
+    <!-- <meta http-equiv="Refresh" content="10; URL=https://www.baidu.com"> -->
+    <!-- meta标签的用法 -->
+
+
+    <title>看不见的html标签的使用</title>
+</head>
+
+<body>
+    <div>测试meta标签的用法</div>
+
+    <script>
+        let msgNum = 1 // 消息条数
+        let cnt = 0 // 计数器
+
+        const inerval = setInterval(() => {
+            console.log('实现浏览器窗口闪烁功能');
+
+            cnt=(cnt+1)%2;
+
+            if(msgNum==0){
+                document.title='聊天界面'
+                clearInterval(inerval)
+            }
+
+            let prefix=cnt%2?`新消息${msgNum}`:''
+
+            document.title=`${prefix}聊天页面`
+
+            
+        }, 1000)
+
+
+
+    </script>
+
+</body>
+
+</html>

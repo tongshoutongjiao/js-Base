@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>generator 和 yield 成员</div>
+    <script>
+        //  使用iterator  取出嵌套数组里的所有成员
+        function* iterTree(arr) {
+
+            if (Array.isArray(arr)) {
+                for (let i = 0; i < arr.length; i++) {
+                    yield* iterTree(arr[i])
+                }
+
+            } else {
+                yield arr
+            }
+
+
+        }
+
+        function flatten(arr) {
+
+            let result = [];
+            for (let i = 0; i < arr.length; i++) {
+                let cur = arr[i];
+                if (Array.isArray(cur)) {
+
+                    result = [...result, ...flatten(cur)]
+
+                    // result.push(...flatten(cur))
+                } else {
+                    result.push(cur)
+                }
+            }
+
+            return result;
+
+
+
+
+        }
+
+        let a = [1, [2, 3, [4, 5],
+            [6, 7],
+            [8, [9, 10, [11],
+                [12, 13]
+            ]],
+            [14, 15]
+        ], 16, 17];
+
+
+
+
+        for (let x of iterTree(a)) {
+            // console.log(x)
+        }
+
+        //  generator
+
+        let generator = function*() {
+            for (let i = 0; i < 6; i++) {
+                yield i
+            }
+        }
+
+        // let squared = (
+        //     for (n of generator()) n * n);
+        // console.log('squared');
+        // console.log(squared)
+
+        var clock = function*(_) {
+            while (true) {
+                yield _;
+                console.log('TICK!')
+                yield _;
+                console.log('TOCK!')
+            }
+        }
+        let y = clock();
+
+
+        let p1 = new Promise((res, rej) => {
+            setTimeout(() => {
+                console.log('p1 决议失败')
+                rej(new Error('fail'))
+            }, 3000)
+
+        })
+
+        let p2 = new Promise((res, rej) => {
+            setTimeout(() => {
+                console.log('p2决议成功')
+                    // throw new Error('cece11111 ')
+                res(p1)
+            }, 1000)
+
+        })
+
+        p2.then(res => {
+            console.log('成功结果');
+            console.log(res)
+        }).catch((e) => {
+            console.log('程序报错处理');
+            console.log(e)
+        })
+
+        //  修饰器
+        function testable(target) {
+            target.isTestable = true;
+
+        }
+
+        @testable
+        class MyTestableClass {
+
+        }
+
+        console.log('查看修饰器函数');
+        console.log(MyTestableClass.isTestable)
+    </script>
+
+</body>
+
+</html>

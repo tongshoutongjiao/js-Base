@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组间隔测试</title>
+</head>
+
+<body>
+    <script>
+        console.log('每个数组的间隔为1秒')
+        // for (var i = 0; i < 5; i++) {
+        //     setTimeout(function () {
+        //         console.log(i);
+        //     }, 1000);
+        // }
+
+        //  每个数字的间隔为1秒
+
+        // for (let i = 0; i < 5; i++) {
+        //     setTimeout(() => {
+        //         console.log(i + 1)
+        //     }, (i + 1) * 1000)
+        // }
+
+
+        const myPromise = (num) => {
+            return new Promise((res, rej) => {
+                setTimeout(() => {
+                    res(num)
+                }, 1000)
+            })
+        }
+
+
+
+        //  myPromise 
+
+        async function test() {
+            for (let i = 0; i < 5;) {
+                i++;
+                console.log(await myPromise(i))
+            }
+        }
+
+        // test()
+
+        // 取出两个数组中相同的部分，并按照大小顺序排列
+
+        const arrayA = [4, 2, 1, 2, 5];
+        const arrayB = [2, 3, 1, 6];
+
+        function process(arrayA, arrayB) {
+            // 这⾥是你实现代码的地⽅
+            return arrayA.filter((item) => {
+                return arrayB.includes(item)
+            }).filter((v, i, arr) => {
+                return arr.indexOf(v) === i;
+            }).sort((a, b) => {
+                return a - b
+            })
+        }
+
+        let res = process(arrayA, arrayB);
+        // console.log('函数执行结果');
+        // console.log(res)
+
+
+        /*
+例如,
+ n = 1, return 1 (⽅法1: 1台阶)
+ n = 2, return 2 (⽅法1: 1台阶&1台阶, ⽅法2: 2台阶)
+ n = 3, return 3 (⽅法1: 1台阶*3次, ⽅法2: 1台阶&2台阶, ⽅法3: 2台阶&1台阶)
+ n=4 return (方法1 1台阶*4次 方法2：1台阶&2台阶一台阶 方法三：1台阶，一台阶，二台阶 方法4 二台阶，二台阶 方法5：二台阶，一台阶，一台阶 )
+*/
+        function step(n) {
+            // 这⾥是你实现代码的地⽅
+            if(n==1){
+                return 1
+            }
+            if(n==2){
+                return 2
+            }
+            return step(n-1)+step(n-2)
+        }
+
+        let n=step(5);
+        console.log('查看结果')
+        console.log(n)
+
+    </script>
+</body>
+
+</html>

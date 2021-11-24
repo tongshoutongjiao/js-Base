@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>new apply bind 的用法和案例</div>
+    <div>
+         2 apply、call、bind 这三个方法之间有什么区别? <br>
+ 先来了解一下这三个方法的基本情况，call、apply 和 bind 是挂在 Function 对象上的三个方法，调用这三个方法的必须是一个函数。
+<br>
+// 这三个方法共有的、比较明显的作用就是，都可以改变函数 func 的 this 指向。
+// call 和 apply 的区别在于，传参的写法不同：apply 的第 2 个参数为数组； 
+// call 则是从第 2 个至第 N 个都是给 func 的传参；而 bind 和这两个（call、apply）又不同，bind 虽然改变了 func 的 this 指向，但不是马上执行，而这两个（call、apply）是在改变了函数的 this 指向之后立马执行。
+    </div>
+    <script src="./js/utils.js"></script>
+    
+</body>
+</html>

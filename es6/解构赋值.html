@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结构赋值</title>
+</head>
+
+<body>
+    <script>
+        console.log('结构赋值');
+        //  模式匹配
+
+
+        function* fibs() {
+            var a = 0;
+            var b = 1;
+            while (true) {
+                // debugger;
+                yield a;
+                console.log('a');
+                console.log(a);
+                [a, b] = [b, a + b]
+            }
+        }
+        var [first, second, third, fourth, fifth, sixth, seven] = fibs();
+
+        let {
+            toString: s
+        } = 123
+    </script>
+</body>
+
+</html>

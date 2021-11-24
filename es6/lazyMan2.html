@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>lazyMan 函数</div>
+    <script>
+        class lazyManClass {
+            constructor(name) {
+                this.name = name;
+                this.taskList = []
+                console.log(`Hi I am ${this.name}`)
+
+                setTimeout(() => {
+                    this.next();
+                })
+
+            }
+            sleep(time) {
+                let that = this
+                let fn = (function(t) {
+                    return function() {
+                        setTimeout(() => {
+                            console.log(`等待了${t}秒`);
+                            that.next()
+                        }, t * 1000)
+                    }
+                })(time)
+                that.taskList.push(fn);
+                return this
+
+            }
+            eat(food) {
+                let that = this;
+                let fn = (function(fd) {
+                    return function() {
+                        console.log(`I am eating ${fd}`)
+                        that.next()
+                    }
+                })(food)
+                that.taskList.push(fn);
+                return that;
+            }
+
+            sleepFirst(time) {
+                let that = this;
+                let fn = (function(t) {
+                    return function() {
+                        setTimeout(() => {
+                            console.log(`先等待了${t}秒...`)
+                            that.next()
+                        }, t * 1000)
+                    }
+                })(time)
+
+                //  把当前函数放到第一项执行
+
+                this.taskList.unshift(fn);
+                return this;
+
+
+
+
+
+            }
+
+            next() {
+                let fn = this.taskList.shift();
+                fn && fn();
+            }
+
+
+
+
+        }
+
+
+        function lazyMan(name) {
+            let newMan = new lazyManClass('Tony');
+
+            return newMan
+        }
+        // lazyMan('Tony').eat('lunch').sleep(10).eat('dinner');
+
+        lazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('jun k food');
+    </script>
+</body>
+
+</html>

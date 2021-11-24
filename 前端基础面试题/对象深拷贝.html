@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象深拷贝</title>
+</head>
+
+<body>
+    <h2>对象深拷贝</h2>
+    <script>
+        //  对象的深复制:
+
+        // function clone(data) {
+        //     //  1 创建对象
+        //     const result = {};
+
+        //     // 2 获取属性（包括symbol）
+        //     let keys = [...Object.getOwnPropertyNames(data), ...Object.getOwnPropertySymbols(data)]
+
+        //     // 3 属性值不存在的话
+        //     if (!keys.length) return data
+
+        //     //4 遍历所有属性值
+        //     keys.forEach(key => {
+        //         const item = data[key];
+        //         if (typeof item === 'object' && item) {
+        //             result[key] = clone(item)
+        //         } else {
+        //             result[key] = item
+        //         }
+
+        //     })
+        //     // 5 返回最新的值
+        //     return result
+
+        // }
+
+        let a = {
+            name: 'zhl'
+        };
+        let b = {
+            age: 30
+        };
+        a.b = b;
+        b.a = a;
+
+        // console.log('查看a');
+        // console.log(a);
+        // console.log ('查看b');
+        // console.log(b)
+
+        // let obj={
+        //     a:b,
+        //     b:a
+        // }
+
+        function clone(obj) {
+
+            // 1 构建一个弱引用对象
+            let map = new WeakMap()
+
+            // 2 深复制函数
+            function deep(data) {
+
+                // 3 创建每次产生的新对象
+                let result={}
+          
+                //  4 获取所有可遍历的属性值，包括symbol 类型的
+                let keys=[...Object.getOwnPropertyNames,...Object.getOwnPropertySymbols]
+             
+                // 5 如果属性值不存在，直接返回对应的值
+                if(!keys.length) return data;
+
+             
+
+                // 6 从弱引用对象中取出对应的值
+                let exist=map.get(data)
+                
+
+                // 7 如果弱引用对象中存在当前属性值，直接返回引用指向
+                if(exist) return exist
+              
+
+                // 8 如果不存在，设置一个弱引用属性
+                map.set(data,result)
+              
+
+                // 9 遍历对象操作
+                keys.forEach(key=>{
+                    let item=data[key];
+                    if(typeof item==='object'&&item){
+                        result[key]=deep(item)
+                    }else{
+                        result[key]=item
+                    }
+
+                })
+             
+
+                // 10 返回此次循环生成的对象值
+
+                return result;
+             
+            }
+
+            // 11 讲引用的结果值返回
+            return deep(obj)
+        }
+
+        let data = clone(a);
+        console.log('结果值');
+        console.log(data);
+
+
+        // var clones = function (obj) {
+        //     if (obj === null) return null
+        //     if (typeof obj !== 'object') return obj;
+        //     if (obj.constructor === Date) return new Date(obj);
+        //     var newObj = new obj.constructor(); //保持继承链
+        //     for (var key in obj) {
+        //         if (obj.hasOwnProperty(key)) { //不遍历其原型链上的属性
+        //             var val = obj[key];
+        //             newObj[key] = typeof val === 'object' ? arguments.callee(val) :
+        //             val; // 使用arguments.callee解除与函数名的耦合
+        //         }
+        //     }
+        //     return newObj;
+        // }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var pipe = (function() {
+            var pipe;
+            return function(value) {
+                pipe = [];
+                var oproxy = new Proxy({}, {
+                    get: function(pipeObj, fnName) {
+                        if (fnName === 'get') {
+                            return pipe.reduce(function(val, fn) {
+                                console.log("val>>>", val);
+                                console.log("fn>>>", fn)
+                                return fn(val)
+                            }, value)
+                        }
+                        //  非get的情况
+                        pipe.push(window[fnName]);
+                        console.log("fnName>>>", fnName)
+                        return oproxy;
+
+                    }
+
+                });
+
+                return oproxy;
+
+            }
+        }());
+
+        var double = n => n * 2;
+        var pow = n => n * n;
+        var reverseInt = n => n.toString().split('').reverse().join('') | 0;
+        let number = pipe(3).double.pow.reverseInt.get;
+        console.log('number');
+        console.log(number);
+
+        let newObj = {
+            name: 'zhl'
+        }
+
+
+        let obj = new Proxy(newObj, {
+            get() {
+                return '哈哈哈'
+            }
+        })
+
+        console.log('查看对象是否相等');
+        console.log(newObj);
+        console.log(obj)
+
+        console.log(obj == newObj)
+
+
+        //
+    </script>
+
+
+</body>
+
+</html>

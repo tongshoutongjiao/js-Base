@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>类数组</div>
+    <div>js中的类数组有哪些呢？</div>
+   1 函数里面的参数对象 arguments；<br>
+
+   2 用 getElementsByTagName/ClassName/Name 获得的 HTMLCollection；<br>
+
+   3    用 querySelector 获得的 NodeList。<br>
+
+   <div>1 类数组是否能使用数组的方法呢？</div>
+   <div>2 类数组有哪些方式可以转换成数组？</div>
+
+
+
+
+    <script type="text/javascript">
+    console.log('类数组的使用方式');
+    function foo(name, age, sex) {
+    console.log(arguments);
+    console.log(typeof arguments);
+    console.log(Object.prototype.toString.call(arguments));
+}
+foo('jack', '18', 'male');
+
+
+    </script>
+    
+</body>
+</html>

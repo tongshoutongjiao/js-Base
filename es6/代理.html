@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let typeArray = new Uint8Array([0, 1, 2]);
+        console.log('查看数组长度')
+        console.log(typeArray, length)
+        typeArray[0] = 5;
+        console.log(typeArray);
+
+        let set = new Set([1, 2, 3]);
+        set = new Set(Array.from(set, val => val * 2));
+        console.log('查看set');
+        console.log(set)
+
+        // iterator
+
+        var myIterable = {};
+        myIterable[Symbol.iterator] = function*() {
+            yield 1;
+            yield 2;
+            yield 3;
+
+        };
+
+
+        console.log('查看遍历逻辑')
+        console.log([...myIterable])
+
+        let myIterable2 = {
+            *[Symbol.iterator]() {
+                yield 'HELLO';
+                yield 'WORLD'
+
+            }
+        };
+
+        console.log('查看遍历逻辑')
+        console.log([...myIterable2]);
+        let arr = [1, 2, 3, 4, 5];
+        for (var i = 0; i < arr.length; i++) {
+            let cur = arr[i]
+            if (cur == 2) {
+                break;
+            }
+            console.log('继续往后执行')
+            console.log(cur);
+
+
+        }
+
+
+        function testFn() {
+            let arr = [1, 2, 3, 4, 5];
+            for (var i = 0; i < arr.length; i++) {
+                let cur = arr[i]
+                if (cur == 2) {
+                    continue;
+                }
+                console.log('继续往后执行')
+                console.log(cur);
+
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

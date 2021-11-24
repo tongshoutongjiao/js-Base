@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class lazyManClass {
+            constructor(name) {
+                this.taskList = [];
+                this.name = name;
+                console.log(`Hi I am ${this.name}`);
+                setTimeout(() => {
+                    this.next()
+                }, 0)
+            }
+            eat(name) {
+                let that = this;
+                let fn = (function(n) {
+                    return function() {
+                        console.log(`I am eating ${n}`);
+                        that.next()
+                    }
+                })(name)
+
+                this.taskList.push(fn);
+                return this;
+            }
+            sleepFirst(time) {
+                let that = this;
+                let fn = (function(t) {
+                    return function() {
+                        setTimeout(() => {
+                            console.log(`等待了${t}秒...`);
+                            that.next()
+
+                        }, t * 1000)
+                    }
+
+                })(time)
+
+                this.taskList.push(fn);
+                return this;
+            }
+
+            sleep(time) {
+                let that = this;
+                let fn = (function(t) {
+                    return function() {
+                        setTimeout(() => {
+                            console.log(`等待了${t}秒...`)
+                            that.next()
+
+                        }, t * 1000)
+                    }
+
+                })(time)
+
+                this.taskList.push(fn);
+                return this;
+            }
+
+
+            next() {
+                let fn = this.taskList.shift();
+                fn && fn()
+            }
+
+
+        }
+
+
+        function LazyMan(name) {
+            let lazyPerson = new lazyManClass(name);
+            return lazyPerson;
+        }
+
+        // console.log('查看返回值');
+        // console.log(LazyMan('Tony').sleep(10))
+
+        LazyMan('Tony').sleepFirst(5).eat('lunch').eat('dinner').sleepFirst(5).sleep(4).eat('junk food');
+    </script>
+
+</body>
+
+</html>

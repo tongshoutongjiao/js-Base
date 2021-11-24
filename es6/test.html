@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = {
+            value: 0,
+            valueOf() {
+                return ++this.value
+            }
+        }
+
+        console.log('a');
+        console.log(a == 1);
+        console.log(a == 2);
+        console.log(a == 3)
+
+        if (a == 1 && a == 2 && a == 3) {
+            console.log(1)
+        }
+
+
+        //  sleep 函数
+
+        function sleep1(time) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();
+                }, time)
+            })
+
+        }
+
+        sleep1(1000).then((res) => {
+            console.log('1秒中之后执行函数')
+        })
+
+        //  generator 模式
+
+        function* sleep2(time) {
+            return yield sleep1(time);
+        }
+
+        const s = sleep2(1500);
+        console.log('seleep2 数据变化')
+        s.next().value.then(() => console.log("sleep2"));
+
+
+
+        //  async await
+        async function sleep3(time) {
+            await sleep1(time);
+        }
+
+
+        (async() => {
+            await sleep3(2500);
+            console.log("sleep3")
+        })();
+
+
+
+        //  数组
+        let obj = {
+            1: 222,
+            2: 123,
+            5: 888
+        }
+
+        function convert(obj) {
+            let arr = []
+
+            for (let i = 1; i <= 12; i++) {
+                let val = obj[i] ? obj[i] : null;
+                arr.push(val)
+            }
+
+            return arr;
+
+        }
+
+        let arr = convert(obj);
+        console.log('查看数组');
+        console.log(arr)
+
+        //  转化函数2
+
+        function convert2(obj) {
+            return Array.from({
+                length: 13
+            }).map((item, index) => obj[index] || null).slice(1)
+
+        }
+
+        let ary = convert2(obj)
+
+        console.log('查看方式2')
+        console.log(ary)
+
+        class LazyMan {
+            constructor(name) {
+                this.taskList = [];
+                this.name = name;
+                console.log(`Hi I am ${this.name}`);
+                setTimeout(() => {
+                    this.next();
+                }, 0);
+            }
+
+            next() {
+                var fn = this.taskList.shift();
+                fn && fn();
+            }
+
+
+        }
+
+        LazyMan('Tony')
+    </script>
+
+</body>
+
+</html>

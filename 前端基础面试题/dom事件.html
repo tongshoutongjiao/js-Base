@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>dom 事件</div>
+    <div>
+        <h2>防抖，节流，代理</h2>
+        <div>下面我们就从防抖、节流、代理 3 个场景出发，详细了解 DOM 事件。</div>
+
+        <input type="text" id="inputVal">
+    </div>
+    <script>
+        //  防抖
+        let val = document.getElementById('inputVal');
+
+        const debounce = function (func, wait = 1000) {
+            let args;
+
+            const debounced = function (...arg) {
+                let timeout = null;
+                args = arg;
+                if (timeout) {
+                    clearTimeout(timeout);
+                    timeout = null;
+                }
+
+                return new Promise((res, rej) => {
+                    timeout = setTimeout(async () => {
+                        try {
+                            const result = await func.apply(this, args)
+                            res(result)
+                        } catch (e) {
+                            rej(e)
+                        }
+                    }, wait)
+                })
+            }
+
+            //  取消函数
+            debounced.cancel = function () {
+                clearTimeout(timeout)
+                timeout = null
+            }
+
+            //  立即执行函数
+            debounced.flash = function () {
+                cancel()
+                return func.apply(this, args)
+            }
+            return debounced
+
+        }
+
+
+        function getValue() {
+            let obj = {
+                name: 'zhl',
+                age: 30
+            };
+            let params = '测试数据';
+
+            return Promise.resolve(obj, params)
+        }
+
+
+
+
+
+        val.oninput = debounce(getValue, 1000)
+
+        //  节流
+        // 监听scroll事件
+        wrap.addEventListener('scroll', e => {
+            let highlightId = ''
+            // 遍历大纲章节位置，与滚动距离比较，得到当前高亮章节id
+            for (let id in offsetMap) {
+                if (e.target.scrollTop <= offsetMap[id].offsetTop) {
+                    highlightId = id
+                    break
+                }
+            }
+            const lastDom = document.querySelector('.highlight')
+            const currentElem = document.querySelector(`a[href="#${highlightId}"]`)
+            // 修改高亮样式
+            if (lastDom && lastDom.id !== highlightId) {
+                lastDom.classList.remove('highlight')
+                currentElem.classList.add('highlight')
+            } else {
+                currentElem.classList.add('highlight')
+            }
+        })
+    </script>
+</body>
+
+</html>

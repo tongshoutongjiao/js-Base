@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>lazy promise 版本</div>
+    <script>
+        class lazyMan {
+            constructor(name) {
+                this.name = name;
+                this.taskList = [];
+                console.log(`Hi I am ${name}`)
+
+                this.next()
+            }
+            sleep(time) {
+                this.taskList.push(() => {
+                    return this.promiseTime.call(this, time)
+                })
+                return this;
+
+            }
+            sleepFirst(time) {
+                this.taskList.unshift(() => {
+                    return this.promiseTime.call(this, time)
+                })
+                return this;
+
+            }
+
+            eat(food) {
+                let that = this;
+                let fn = function() {
+                    console.log(`I am eating ${food}`);
+                    return Promise.resolve()
+
+                }
+                this.taskList.push(fn);
+                return this
+
+            }
+
+            promiseTime(time) {
+
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+
+                        console.log(`等待了${time}秒,开始执行`);
+                        resolve()
+
+                    }, time * 1000)
+
+                })
+
+
+
+            }
+
+            next() {
+
+                Promise.resolve().then(async res => {
+
+                    while (this.taskList.length) {
+                        await this.taskList.shift()()
+                    }
+                })
+            }
+
+
+        }
+
+        new lazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('jun k food');
+    </script>
+</body>
+
+</html>

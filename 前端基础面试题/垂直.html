@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+        }
+        .container{
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+
+        }
+        header,footer{
+            min-height: 100px;
+
+        }
+        header{
+            background: lightgoldenrodyellow;
+        }
+        footer{
+            background: lightseagreen;
+        }
+        main{
+            flex: 1;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>头部</header>
+        <main>内容</main>
+        <footer>底部</footer>
+    </div>
+    
+</body>
+</html>

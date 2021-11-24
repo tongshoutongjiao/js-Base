@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>关于对象的浅拷贝</div>
+
+
+    <script type="text/javascript">
+
+//  利用原生js实现数据的浅拷贝
+// 如果是基础引用类型的数据，则直接返回，否则的话，复制一层地址，将对应的结果返回
+    function shallowCopy(target){
+        if(typeof target==="object"&&target!==null){
+            const cloneTarget=Array.isArray(target)?[]:{};
+            for(let prop in target){
+                if(target.hasOwnProperty(prop)){
+                    cloneTarget[prop] = target[prop];
+                }
+            }
+            return cloneTarget;
+        }else{
+            return target;
+        }
+
+
+
+
+    }
+
+
+
+    </script>
+    
+</body>
+</html>

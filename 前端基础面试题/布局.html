@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+        }
+        .main, .aside {
+            height: 500px;
+        }
+
+        .main {
+            background-color: #f09e5a;
+            flex: 1;
+
+        }
+
+        .aside {
+            background-color: #c295cf;
+            width: 200px;
+
+        }
+
+        @media only screen and (max-width: 1000px) {
+            .wrap {
+                flex-direction: row;
+            }
+            .main {
+                flex: 100%;
+                background: bisque;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <main class="main">主要容器布局</main>
+        <aside class="aside">次要容器布局</aside>
+    </div>
+
+</body>
+
+</html>

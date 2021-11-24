@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function async1() {
+            console.log('async1 start');
+            await async2();
+            console.log('async1 end');
+        }
+
+
+        async function async2() {
+            console.log('async2');
+        }
+
+
+        console.log('script start');
+
+
+        setTimeout(function() {
+            console.log('setTimeout');
+        }, 0)
+        async1();
+        new Promise(function(resolve) {
+            console.log('promise1');
+            resolve();
+        }).then(function() {
+            console.log('promise2');
+        });
+        console.log('script end');
+
+        //  script start 
+        // async1 start
+        // async2 
+        // promise1
+        // script end
+        //   async1 end
+        // promise2
+        //  setTimeout
+
+
+
+        // class Example extends React.Component {
+        //     constructor() {
+        //         super();
+        //         this.state = {
+        //             val: 0
+        //         };
+        //     }
+        //     componentDidMount() {
+        //         this.setState({
+        //             val: this.state.val + 1
+        //         });
+        //         console.log(this.state.val); // 第 1 次 log  0
+        //         this.setState({
+        //             val: this.state.val + 1
+        //         });
+        //         console.log(this.state.val); // 第 2 次 log 0
+        //         setTimeout(() => {
+        //             this.setState({
+        //                 val: this.state.val + 1
+        //             });
+        //             console.log(this.state.val); // 第 3 次 log  2
+        //             this.setState({
+        //                 val: this.state.val + 1
+        //             });
+        //             console.log(this.state.val); // 第 4 次 log  3
+        //         }, 0);
+        //     }
+        //     render() {
+        //         return null;
+        //     }
+        // };
+
+
+        var b = 10;
+        (function b() {
+            b = 20;
+            console.log(b);
+        })();
+
+        var a = {
+            n: 1
+        };
+        var b = a;
+        a.x = a = {
+            n: 2
+        };
+
+
+        console.log(a.x);
+        console.log(b.x);
+
+
+
+
+        //
+    </script>
+
+</body>
+
+</html>
