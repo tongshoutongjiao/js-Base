@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>为什么说函数是 JavaScript 的一等公民？</title>
+</head>
+
+<body>
+    <div>
+        为什么说函数是 JavaScript 的一等公民？
+    </div>
+    <div>
+        数据类型与函数是很多高级语言中最重要的两个概念，前者用来存储数据，后者用来存储代码。
+        JavaScript 中的函数相对于数据类型而言更加复杂，
+        它可以有属性，也可以被赋值给一个变量，还可以作为参数被传递......正是这些强大特性让它成了 JavaScript 的“一等公民”。<br>
+        下面我们就来详细了解函数的重要特性。
+
+
+    </div>
+    <div>this 关键字 <br>
+        <p>什么是 this？this 是 JavaScript 的一个关键字，一般指向调用它的对象。 </p>
+        <div>
+            这句话其实有两层意思，首先 this 指向的应该是一个对象，更具体地说是函数执行的“上下文对象”。其次这个对象指向的是“调用它”的对象，如果调用它的不是对象或对象不存在，则会指向全局对象（严格模式下为
+            undefined）。
+
+
+        </div>
+    </div>
+    <div>
+        箭头函数和普通函数相比，有以下几个区别，在开发中应特别注意：
+        1 不绑定arguments 对象，也就说在箭头函数内访问agruments 对象会报错
+        2 不能用作构造器，也就说不能通过关键字new 来创建实例
+        3 默认不会创建prototype原型属性
+        4 不能用作Generator()函数，不能使用yield关键字
+
+
+    </div>
+    <div>
+        函数的转化
+        <p>
+            在讲函数转化之前，先来看一道题：编写一个 add() 函数，支持对多个参数求和以及多次调用求和。
+        </p>
+    </div>
+    <script>
+        console.log('查看索引值');
+        // add(1) // 1
+        // add(1)(2)// 3
+        // add(1, 2)(3, 4, 5)(6) // 21
+        //  支持多个参数以及多次调用求和
+
+        // function add(...args) {
+        //     let arr = args;
+
+        //     function fn(...newArgs) {
+        //         arr = [...arr, ...newArgs];
+        //         return fn;
+        //     }
+        //     fn.toString = fn.valueOf = function () {
+        //         return arr.reduce((acc, cur) => acc + parseInt(cur))
+        //     }
+        //     return fn;
+        // }
+
+        // add(1, 2, 3, 4);
+
+
+
+        function A() {
+            console.log('A函数')
+        }
+        A.prototype.a = function () {
+            return 'a';
+        }
+
+        function B() {
+            console.log('B 函数')
+        }
+        B.prototype = new A()
+        B.prototype.b = function () {
+            return 'b';
+        }
+        var c = new B()
+        c.b() // 'b'
+        c.a() // 'a'
+
+
+        //  在函数内部访问外部函数作用域时就会产生闭包。闭包很有用，因为它允许将函数与其所操作的某些数据（环境）关联起来。这种关联不只是跨作用域引用，也可以实现数据与函数的隔离。
+        let SingleStudent=(function(){
+            function Student(){ }
+            let _student;
+            return function(){
+                if(_student) return _student;
+                _student=new Student();
+                return _student;
+            }
+        })();
+
+        let s= new SingleStudent();
+        let s2=new SingleStudent();
+        console.log('查看当前单例模式')
+        console.log(s==s2)
+
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 JavaScript 的数据类型，你知多少？</title>
+</head>
+
+<body>
+    <div>
+        数据类型通常是一门编程语言的基础知识，JavaScript 的数据类型可以分为 7
+        种：空（Null）、未定义（Undefined）、数字（Number）、字符串（String）、布尔值（Boolean）、符号（Symbol）、对象（Object）。
+
+
+
+    </div>
+    <div>
+        Object
+        <h2>
+            相对于基础类型，引用类型 Object 则复杂很多。简单地说，Object 类型数据就是键值对的集合，键是一个字符串（或者 Symbol） ，值可以是任意类型的值； 复杂地说，Object 又包括很多子类型，比如
+            Date、Array、Set、RegExp。
+        </h2>
+
+    </div>
+    <script>
+        // deep 
+
+        function clone(obj) {
+            let map = new WeakMap();
+
+            function deep(data) {
+                let result = [];
+             const keys = [...Object.getOwnPropertySymbols(data), ...Object.getOwnPropertyNames(data)];
+                    if (!keys.length) return data;
+                    const exist = map.get(data);
+                    if (exist) {
+                        return exist
+                    }
+                    map.set(data, result);
+                    keys.forEach((key) => {
+                        let item = data[key];
+                        if (typeof item === 'Object' && item) {
+                            result[key] = deep(item)
+                        } else {
+                            result[key] = item;
+                        }
+                    })
+                    return result;
+
+                }
+
+            return deep(obj)
+
+        }
+
+
+
+
+
+  let a={
+      name:'zhl',
+      zhl:{
+          loc:'bj',
+          hobby:'code'
+      }
+  }
+  let b={
+      name:'zxj',
+      age:31,
+      years:2021
+  };
+  a.b=b;
+  b.a=a;
+
+            let name = clone(a);
+            console.log(name);
+    </script>
+</body>
+
+</html>

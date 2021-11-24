@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        作为前端工程师的你，或许早已习惯了在编写浏览器组件时使用 import 和 from 来管理代码模块，在编写 Node.js 服务时通过 require 和 module.exports 来复用代码。但 JavaScript
+        模块化之路充满了坎坷。这一课时就带你由近及远，看看 JavaScript 模块发展史上那些著名的模块规范与实现。
+    </div>
+
+    <div>
+        <h2>ES6 模块</h2>
+        <div>ES6 模块对于引用声明有严格的要求，首先必须在文件的首部，不允许使用变量或表达式，不允许被嵌入到其他语句中。所以下面 3 种引用模块方式都会报错。
+
+            `
+            // 必须首部声明
+            let a = 1
+            import { app } from './app';
+            // 不允许使用变量或表达式
+            import { 'a' + 'p' + 'p' } from './app';
+            // 不允许被嵌入语句逻辑
+            if (moduleName === 'app') {
+              import { init } from './app';
+            } else {
+              import { init } from './bpp';
+            }
+            `
+
+        </div>
+
+        <h2>CommonJS</h2>
+        <div>
+            CommonJS 最初名为 Server.js，是为浏览器之外的 JavaScript 运行环境提供的模块规范，最终被 Node.js 采用。
+
+
+        </div>
+        <div>
+            CommonJS 规定每个文件就是一个模块，有独立的作用域。每个模块内部，都有一个 module 对象，代表当前模块。通过它来导出 API，它有以下属性：
+
+            id 模块的识别符，通常是带有绝对路径的模块文件名；
+
+            filename 模块的文件名，带有绝对路径；
+
+            loaded 返回一个布尔值，表示模块是否已经完成加载；
+
+            parent 返回一个对象，表示调用该模块的模块；
+
+            children 返回一个数组，表示该模块要用到的其他模块；
+
+            exports 表示模块对外输出的值。
+
+            引用模块则需要通过 require 函数，它的基本功能是，读入并执行一个 JavaScript 文件，然后返回该模块的 exports 对象。
+
+
+        </div>
+        <h2>AMD</h2>
+        <div>
+            在 ES6 模块出现之前，AMD（Asynchronous Module Definition，异步模块定义）是一种很热门的浏览器模块化方案。
+
+
+        </div>
+        <div>
+            <h2>CMD:CMD（Common Module Definition，通用模块定义）是基于浏览器环境制定的模块规范。 </h2>
+            <div>CMD 定义模块也是通过一个全局函数 define 来实现的，但只有一个参数，该参数既可以是函数也可以是对象：define(factory);
+                如果这个参数是对象，那么模块导出的就是对象；如果这个参数为函数，那么这个函数会被传入 3 个参数 require 、 exports 和 module。
+                define(function(require, exports, module) {
+                //...
+                });
+                第 1 个参数 require 是一个函数，通过调用它可以引用其他模块，也可以调用 require.async 函数来异步调用模块。
+
+                第 2 个参数 exports 是一个对象，当定义模块的时候，需要通过向参数 exports 添加属性来导出模块 API。
+
+                第 3 个参数 module 是一个对象，它包含 3 个属性：
+
+                uri，模块完整的 URI 路径；
+
+                dependencies，模块的依赖；
+
+                exports，模块需要被导出的 API，作用同第二个参数 exports。
+
+                <div>特性：CMD 最大的特点就是懒加载，和上面示例代码一样，不需要在定义模块的时候声明依赖，可以在模块执行时动态加载依赖。当然还有一点不同，那就是 CMD 同时支持同步加载模块和异步加载模块。
+
+                    用一句话来形容就是，它整合了 CommonJS 和 AMD 规范的特点。遵循 CMD 规范的代表开源项目是 sea.js ，它的实现和 requirejs 没有本质差别，有兴趣的同学可以看其源码。
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+
+    </script>
+
+</body>
+
+</html>

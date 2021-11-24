@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第03讲：3 个使用场景助你用好 DOM 事件
+    </title>
+</head>
+
+<body>
+    <div>
+        这一课时我们将一起探究 DOM 事件。<br>
+
+        DOM 事件数量非常多，即使分类也有十多种，比如键盘事件、鼠标事件、表单事件等，而且不同事件对象属性也有差异，这带来了一定的学习难度。<br>
+
+        但页面要与用户交互，接收用户输入，就离不开监听元素事件，所以，DOM 事件是前端工程师必须掌握的重要内容，同时也是 DOM 的重要组成部分。<br>
+
+        下面我们就从防抖、节流、代理 3 个场景出发，详细了解 DOM 事件。<br>
+    </div>
+    <div>
+        <h2>防抖</h2>
+        <div>防抖和节流，取消和立即执行函数</div>
+    </div>
+    <script>
+        // 防抖
+        // 代码2
+        const debounce = (func, wait = 0) => {
+            let timeout = null
+            let args
+
+            function debounced(...arg) {
+                args = arg
+                if (timeout) {
+                    clearTimeout(timeout)
+                    timeout = null
+                }
+                // 以Promise的形式返回函数执行结果
+                return new Promise((res, rej) => {
+                    timeout = setTimeout(async () => {
+                        try {
+                            const result = await func.apply(this, args)
+                            res(result)
+                        } catch (e) {
+                            rej(e)
+                        }
+                    }, wait)
+                })
+            }
+            // 允许取消
+            function cancel() {
+                clearTimeout(timeout)
+                timeout = null
+            }
+            // 允许立即执行
+            function flush() {
+                cancel()
+                return func.apply(this, args)
+            }
+            debounced.cancel = cancel
+            debounced.flush = flush
+            return debounced
+        }
+    </script>
+
+</body>
+
+</html>

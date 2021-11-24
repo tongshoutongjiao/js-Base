@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器同源策略与跨域方案详解</title>
+</head>
+<body>
+    <div>同源策略</div>
+    <div>
+        <h2>请求跨域解决方案
+            <div>跨域资源共享（CORS，Cross-Origin Resource Sharing）是浏览器为 AJAX 请求设置的一种跨域机制，让其可以在服务端允许的情况下进行跨域访问。主要通过 HTTP 响应头来告诉浏览器服务端是否允许当前域的脚本进行跨域访问。
+
+            </div>
+        </h2>
+        <h2>JSONP  </h2>
+        <div>
+            JSONP（JSON with Padding）的大概意思就是用 JSON 数据来填充，怎么填充呢？结合它的实现方式可以知道，就是把 JSON 数填充到一个回调函数中。这种比较 hack 的方式，依赖的是 script 标签跨域引用 js 文件不会受到浏览器同源策略的限制。
+        </div>
+        <div>
+            <h2>Websocket</h2>
+            <div>Websocket 是 HTML5 规范提出的一个应用层的全双工协议，适用于浏览器与服务器进行实时通信场景。
+             </div>
+             <div>什么叫全双工呢？ </div>
+             <div>
+                这是通信传输的一个术语，这里的“工”指的是通信方向，“双工”是指从客户端到服务端，以及从服务端到客户端两个方向都可以通信，“全”指的是通信双方可以同时向对方发送数据。与之相对应的还有半双工和单工，半双工指的是双方可以互相向对方发送数据，但双方不能同时发送，单工则指的是数据只能从一方发送到另一方。
+             </div>
+
+        </div>
+        <div>
+            <h2>代理转发 </h2>
+            <div>
+                跨域是为了突破浏览器的同源策略限制，既然同源策略只存在于浏览器，那可以换个思路，在服务端进行跨域，比如设置代理转发。这种在服务端设置的代理称为“反向代理”，对于用户而言是无感知的。
+            </div>
+            <div>
+                另一种在客户端使用的代理称为“正向代理”，主要用来代理客户端发送请求，用户使用时必须配置代理服务器的网址，比如常用的 VPN 工具就属于正向代理。
+            </div>
+            <div>代理转发实现起来非常简单，在当前被访问的服务器配置一个请求转发规则就行了。</div>
+        </div>
+
+    </div>
+    <script>
+
+    </script>
+    
+</body>
+</html>

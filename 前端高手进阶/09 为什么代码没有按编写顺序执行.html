@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>为什么代码没有按照编写顺序执行</title>
+</head>
+
+<body>
+    <div>
+        前端工程师算是最幸运的软件工程师，因为从一开始就可以接触到“异步”这种高级特性，比如 DOM 事件、AJAX 请求及定时器；同时也是最不幸的软件工程师，因为入门 JavaScript
+        的时候就要习惯异步这种高难度的开发方式，比如上一课时提到的那道经典的笔试题，就是异步造成的输出结果与预期不一致。
+    </div>
+    <div>这一课时我们就来深入讲解前端工程师熟悉但并不完全了解的 JavaScript 异步。</div>
+    <h2> 异步和同步 </h2>
+    <div>
+        相比异步而言，大多数工程师可能更熟悉的是同步。
+
+        要比较同步和异步，可以将调用函数的过程分成两部分：执行操作和返回结果。
+
+        程序在同步调用函数的时候，会立即执行操作并等待得到返回结果后再继续运行，也就是说同步执行是阻塞的。
+        而异步会将操作和结果在时间上分隔开来，在当下执行操作，在未来某个时刻返回结果，在这个等待返回结果的过程中，程序将继续执行后面的代码。也就是说异步执行是非阻塞的。
+
+
+    </div>
+    <h2>异步原理</h2>
+    <script>
+        const arr = [1, 2, 3, 4, 5];
+
+        arr.reduce(async (prs, cur, index) => {
+            const t = await prs
+
+            console.log('查看t的意思');
+            console.log(t);
+            const time = index === 0 ? 0 : 1000 + (index - 1) * 500;
+            console.log('啦啦啦啦')
+            return new Promise((res) => {
+                setTimeout(() => {
+                    console.log(cur);
+                    res(time)
+                }, time)
+            })
+        }, Promise.resolve(0))
+
+      let sum=  arr.reduce(function(prev,cur,next){
+            return prev+cur;
+        },0)
+
+
+        arr.reduce(async (pre,cur,index)=>{
+            
+        })
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

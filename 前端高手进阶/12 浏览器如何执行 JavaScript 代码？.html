@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第12讲：浏览器如何执行 JavaScript 代码？ </title>
+</head>
+
+<body>
+    <div>
+        这一课时从编译过程和内存管理两个方面带你来探索 JavaScript 引擎的工作机制。
+        <div>编译过程
+            在“加餐1：手写 CSS 预处理器”中提过编译器的基本工作流程，大体上包括 3 个步骤：解析（Parsing）、转换（Transformation）及代码生成（Code Generation），JavaScript
+            引擎与之相比大体上也遵循这个过程，可分为解析、解释和优化 3 个步骤。下面我们就以 V8 引擎为例进行讲解。
+
+
+
+        </div>
+        <div>
+            <p>解析</p>
+            <div>
+                解析步骤又可以拆分成 2 个小步骤：
+
+                词法分析，将 JavaScript 代码解析成一个个的令牌（Token）；
+
+                语法分析，将令牌组装成一棵抽象的语法树（AST）
+
+
+            </div>
+        </div>
+        <div>
+            <h2>内存管理</h2>
+            <div>
+                JavaScript 引擎的内存空间分为堆（Heap）和栈（Stack）。堆和栈是两种不同的数据结构，堆是具有树结构的数组，栈也是数组，但是遵循“先进后出”规则。
+
+
+            </div>
+        </div>
+        <div>
+            栈是一个临时存储空间，主要存储局部变量和函数调用（对于全局表达式会创建匿名函数并调用）。<br>
+
+            对于基本数据类型（String、Undefined、Null、Boolean、Number、BigInt、Symbol）的局部变量，会直接在栈中创建，而对象数据类型局部变量会存储在堆中，栈中只存储它的引用地址，也就是我们常说的浅拷贝。全局变量以及闭包变量也是只存储引用地址。总而言之栈中存储的数据都是轻量的。
+
+            对于函数，解释器创建了“调用栈”（Call Stack）来记录函数的调用流程。每调用一个函数，解释器就会把该函数添加进调用栈，解释器会为被添加进的函数创建一个栈帧 （Stack
+            Frame，这个栈帧用来保存函数的局部变量以及执行语句）并立即执行。如果正在执行的函数还调用了其它函数，那么新函数也将会被添加进调用栈并执行。一旦这个函数执行结束，对应的栈帧也会被立即销毁。
+
+            查看调用栈的方式有 2 种：
+
+            调用函数 console.trace() 打印到控制台；
+
+            利用浏览器开发者工具进行断点调试。
+        </div>
+        <div>
+            堆
+            堆空间存储的数据比较复杂，大致可以划分为下面 5 个区域：
+            代码区（Code Space）、Map 区(Map Space)、大对象区（Large Object Space）、新生代（New
+            Space）、老生代（Old Space）。这一课时重点讨论新生代和老生代的内存回收算法。
+
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+        //  费布那切数列
+        function fib(n) {
+            if (n < 3) return 1
+            console.trace();
+            return fib(n - 1) + fib(n - 2)
+        }
+        fib(4);
+    </script>
+
+</body>
+
+</html>
