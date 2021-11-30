@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>共同页面</title>
+</head>
+<body>
+<div>promise 功能页面</div>
+<script src="./js/promise3.js"></script>
+<script>
+
+    let myP = new Promise(function(resolve, reject){
+        console.log('执行')
+        setTimeout(function(){
+            reject(3)
+        }, 1000)
+    });
+
+    myP.then(function(res){
+        console.log('成功了')
+        console.log(res)
+    },function(err){
+        console.log('拒绝了')
+        console.log(err)
+    });
+
+
+</script>
+
+</body>
+</html>

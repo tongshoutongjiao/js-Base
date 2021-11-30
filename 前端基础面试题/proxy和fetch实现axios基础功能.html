@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>proxy和fetch实现fetch函数的基础功能</title>
+</head>
+<body>
+<div>proxy和fetch实现fetch函数的基础功能</div>
+
+<script>
+    const fetch=require("node-fetch");
+    const  axiosOriginal={
+        methods:['GET','POST','PUT','DELETE','OPTIONS']
+    };
+    const axios=new Proxy(axiosOriginal,{
+        set(){
+            throw new Error("Can't set any property")
+        },
+        get(target,name){
+            const method=name.toLocaleUpperCase();
+            if(target.methods.indexOf(method)===-1){
+                throw new Error(`Can't support method ${method}`)
+            }
+
+            return (url,options)=>{
+                return fetch(url,{
+                    method,
+                    ...options
+                }).then(res=>res.text())
+
+            }
+
+        }
+    })
+    axios.get("http://www.baidu.com").then(res => console.log(res));
+    axios.post("http://www.baidu.com").then(res => console.log(res))
+
+
+</script>
+
+
+
+</body>
+</html>

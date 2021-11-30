@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生call apply bind 方法的实现</title>
+</head>
+<body>
+<div>
+  原生call apply bind 方法的实现
+</div>
+<script >
+
+
+/**
+* @Description: MyCall函数
+* @author hlZhao
+* @date 2021/11/29
+*/
+
+Function.prototype.MyCall=function (context,...rest){
+//    call 函数的作用：修改对象的上下文指向，并立即执行函数
+
+    // 创建一个fn 函数，将当前函数的地址赋值过来，同时相当于修改了当前执行函数的this指向为context
+    context.fn=this;
+
+    // 执行对应的fn 函数，将参数传递给对应的函数值，返回执行结果
+    let result=context.fn(...rest);
+
+    // 删除创建的函数
+    delete context.fn;
+    return  result
+
+}
+
+
+let obj={
+    name:'zhl',
+    age:30,
+    getName
+}
+
+let obj2={
+    name:'test',
+    age:'unknown',
+}
+
+let obj3={
+    name:'myCall',
+    age:26
+}
+function getName(...rest){
+    // let name='test';
+    console.log('查看到期函数')
+    console.log(rest)
+    return this.name+rest[0];
+}
+
+
+let name=obj.getName.MyCall(obj2,'测试');
+console.log('this.name')
+console.log(name)
+
+
+
+
+/**
+ * MyApply函数
+ * @constructor
+ */
+Function.prototype.MyApply=function (context,...rest){
+
+//    原理同call一样，仅仅接收传参方式不同，apply接收传参方式为数组形式
+    let arr=rest[0]||[];
+     context.fn=this;
+    let result=context.fn(...arr)
+    delete  context.fn;
+    return result
+
+
+}
+
+/**
+ * MyBind 函数
+ *
+ */
+
+Function.prototype.MyBind=function (context,...rest){
+//  可以在此巧妙的利用apply函数解决
+
+    // 中间加了一层函数，仅仅用于改变函数this指向问题，用call或者apply 都可以
+
+    // 引用apply
+    // return function (){
+    //     context.MyApply(context,rest)
+    // }
+
+//     引用call
+    return function (){
+        context.MyCall(context,...rest)
+    }
+
+
+
+}
+
+
+function myNew(fn){
+
+    // 创建一个拥有指定原型的对象
+    const  newObj=Object.create(fn.prototype);
+
+   //  执行当前函数，并利用apply 函数修改当前函数的this指向，传给函数的其他参数以数组形式传递
+   let  result= fn.apply(newObj,[...arguments].slice(1));
+
+   // 判断函数返回的结果是否是对象，否则就用newObj代替
+   return typeof result==='object'?result:newObj;
+
+}
+
+function People(obj){
+    this.name=obj.name;
+    this.age=obj.age;
+}
+People.prototype={
+    hobby(){
+        this.hobby='code';
+        return this
+    },
+    swim(){
+         this.swim='swim';
+         return this
+    }
+}
+
+
+
+let obj5=new People({name:'zhl',age:30});
+
+console.log('obj5')
+console.log(obj5);
+console.log('查看原型');
+console.log(obj5.prototype)
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
