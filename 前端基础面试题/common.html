@@ -6,24 +6,58 @@
 </head>
 <body>
 <div>promise 功能页面</div>
-<script src="./js/promise3.js"></script>
+<!--<script src="./js/promise3.js"></script>-->
+<!--<script src="./js/sort.js"></script>-->
 <script>
 
-    let myP = new Promise(function(resolve, reject){
-        console.log('执行')
-        setTimeout(function(){
-            reject(3)
-        }, 1000)
-    });
+    // let myP = new Promise(function(resolve, reject){
+    //     console.log('执行')
+    //     setTimeout(function(){
+    //         reject(3)
+    //     }, 1000)
+    // });
+    //
+    // myP.then(function(res){
+    //     console.log('成功了')
+    //     console.log(res)
+    // },function(err){
+    //     console.log('拒绝了')
+    //     console.log(err)
+    // });
 
-    myP.then(function(res){
-        console.log('成功了')
-        console.log(res)
-    },function(err){
-        console.log('拒绝了')
-        console.log(err)
-    });
 
+    // function foo(){
+    //     var a=2;
+    //     this.bar()
+    // }
+    //
+    // function bar(){
+    //     console.log('查看a的值');
+    //     // console.log(a)
+    //     console.log(this.a)
+    // }
+    //
+    // foo();
+
+    let randoms={
+        [Symbol.iterator]:function (){
+            return {
+                next:function (){
+                    return {value:Math.random()}
+                }
+            }
+        }
+    };
+    var randomPool=[];
+    for(let n of randoms){
+        randomPool.push(n)
+    //    防止无限运行
+        if(randomPool.length===1000){
+            console.log('查看randomPool')
+            console.log(randomPool)
+            break;
+        }
+    }
 
 </script>
 
