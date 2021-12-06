@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>promise 功能页面</div>
-<!--<script src="./js/promise3.js"></script>-->
+<script src="./js/promise5.js"></script>
 <!--<script src="./js/sort.js"></script>-->
 <script>
 
@@ -39,25 +39,25 @@
     //
     // foo();
 
-    let randoms={
-        [Symbol.iterator]:function (){
-            return {
-                next:function (){
-                    return {value:Math.random()}
-                }
-            }
-        }
-    };
-    var randomPool=[];
-    for(let n of randoms){
-        randomPool.push(n)
-    //    防止无限运行
-        if(randomPool.length===1000){
-            console.log('查看randomPool')
-            console.log(randomPool)
-            break;
-        }
-    }
+    // let randoms={
+    //     [Symbol.iterator]:function (){
+    //         return {
+    //             next:function (){
+    //                 return {value:Math.random()}
+    //             }
+    //         }
+    //     }
+    // };
+    // var randomPool=[];
+    // for(let n of randoms){
+    //     randomPool.push(n)
+    // //    防止无限运行
+    //     if(randomPool.length===1000){
+    //         console.log('查看randomPool')
+    //         console.log(randomPool)
+    //         break;
+    //     }
+    // }
 
 </script>
 
