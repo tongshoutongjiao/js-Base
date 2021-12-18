@@ -1,10 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div id="app">
+    <h2>{{title}}</h2>
+    <input type="text" v-model="title" @keydown.enter="addTodo">
+    <button v-if="active<all" @click="clear">清理</button>
+    <ul v-if="todos.length">
+        <li v-for="item in todos">
+            <input type="checkbox" v-model="item.done">
+          <span :class="{done:item.done}">
+              {{item.title}}
+          </span>
+        </li>
+        全选<input type="checkbox" v-model="allDone">
+        <div>
+            {{active}}/{{all}}
+        </div>
+
+    </ul>
+    <div v-else>暂无数据</div>
+</div>
+<script src="./js/vue.js"></script>
+<script>
+    const App = {
+    data() {
+        return {
+            title: "",// 定义一个数据
+            todos: [
+                {title:'吃饭',done:false},
+                {title:'睡觉',done:true},
+                {title: '测试',done:false}
+            ]
+        }
+    },
+        created(){
+        window.addEventListener('beforeunload',function (){
+            console.log('查看是否能触发')
+
+        },false)
+
+        },
+
+        unmounted(){
+        console.log('卸载函数')
+        },
+    computed:{
+        active(){
+            return this.todos.filter(v=>!v.done).length
+        },
+        all(){
+            return this.todos.length
+        },
+        allDone: {
+            get: function () {
+                return this.active === 0
+            },
+            set: function (val) {
+                this.todos.forEach(todo=>{ todo.done = val});
+            }
+        },
+    },
+    methods:{
+        addTodo(){
+            this.todos.push({
+                title: this.title,
+                done:false
+            });
+            this.title=''
+        },
+        clear(){
+            this.todos = this.todos.filter(v=>!v.done)
+        }
+    }
+}
+// 启动应用
+Vue.createApp(App).mount('#app')
+</script>
+<style>
+    .done{
+        color: grey;
+        text-decoration: line-through;
+    }
+</style>
+
 </body>
 </html>
