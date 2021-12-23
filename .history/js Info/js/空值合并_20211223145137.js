@@ -167,42 +167,19 @@ let k = arr.length;
 console.log("查看arr的值");
 console.log(arr);
 
-// let ask = (question, yes, no) => {
-//   console.log("查看arr中的数据");
-//   alert("111");
-//   if (confirm(question)) yes();
-//   else no();
-// };
-
-// ask(
-//   "Do you agress?",
-//   () => alert("You Agree"),
-//   () => alert("You canceled the execution.")
-// );
-
-function deepClone(target, origin) {
-  for (let key in origin) {
-    if (typeof origin[key] === "object" && key !== null) {
-      target[key] = deepClone(origin[key]);
-    } else {
-      target[key] = origin[key];
-    }
-  }
-
-  return target;
-}
-
-let calculator = {
-  read() {
-    let val = +prompt("a", "");
-    this.val = val;
-    let val2 = +prompt("b", "");
-    this.val2 = val2;
-  },
-  sum() {
-    return Number(this.val) + Number(this.val2);
-  },
-  mul() {
-    return this.val * this.val2;
-  },
+let ask = (question, yes, no) => {
+  console.log("查看arr中的数据");
+  alert("111");
+  if (confirm(question)) yes();
+  else no();
 };
+
+ask(
+  "Do you agress?",
+  () => alert("You Agree"),
+  () => alert("You canceled the execution.")
+);
+
+
+
+

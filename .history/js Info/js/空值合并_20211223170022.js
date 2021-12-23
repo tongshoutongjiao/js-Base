@@ -167,18 +167,18 @@ let k = arr.length;
 console.log("查看arr的值");
 console.log(arr);
 
-// let ask = (question, yes, no) => {
-//   console.log("查看arr中的数据");
-//   alert("111");
-//   if (confirm(question)) yes();
-//   else no();
-// };
+let ask = (question, yes, no) => {
+  console.log("查看arr中的数据");
+  alert("111");
+  if (confirm(question)) yes();
+  else no();
+};
 
-// ask(
-//   "Do you agress?",
-//   () => alert("You Agree"),
-//   () => alert("You canceled the execution.")
-// );
+ask(
+  "Do you agress?",
+  () => alert("You Agree"),
+  () => alert("You canceled the execution.")
+);
 
 function deepClone(target, origin) {
   for (let key in origin) {
