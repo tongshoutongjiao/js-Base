@@ -1,16 +1,19 @@
 let val = prompt(`Who's there?`, 'xxx');
 
-if (val === '') {
+if (val === '' || val = null) {
     console.log('Canceled')
-} else if (val === 'Admin'){
+} else if (val === 'Admin') {
     let psd = prompt('Password?', '');
+
     if (psd === '' || psd === null) {
         console.log('Cancel')
+
     } else {
         let val = psd === 'TheMaster' ? 'Welcome!' : 'Wrong password';
         console.log(val)
+
     }
 
-}else{
+} else {
     console.log(`i don't you know`)
 }

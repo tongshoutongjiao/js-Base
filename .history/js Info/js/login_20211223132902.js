@@ -1,8 +1,8 @@
 let val = prompt(`Who's there?`, 'xxx');
 
-if (val === '') {
+if (val === '' || val = null) {
     console.log('Canceled')
-} else if (val === 'Admin'){
+} elseif (val === 'Admin'){
     let psd = prompt('Password?', '');
     if (psd === '' || psd === null) {
         console.log('Cancel')
