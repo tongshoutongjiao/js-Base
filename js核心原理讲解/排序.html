@@ -1,0 +1,252 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+ </head>
+
+ <body>
+     <h2>各种排序</h2>
+     <script>
+         // 比较类排序 1 交换排序 2 插入排序 3 选择排序 4 归并排序
+         //  交换排序包括 1 冒泡排序 2 快速排序 
+         // 选择排序包括 1 普通选择排序 2 堆排序
+         let arr = [1, 2, 4, 7, 29, 3, 5, 54, 45, 32, 765, 53, 46, 67, 8];
+
+         // 冒泡排序是最基础的排序。一般在最开始学习数据结构的时候就会接触它。冒泡排序是一次比较两个元素，如果顺序是错误的，就把它们交换过来。走访数列的工作会重复的进行，直到不需要再交换，也就说该排列已经排序完成
+
+         //  1  冒泡排序
+         function bubbleSort(arr) {
+             for (let i = 0; i < arr.length - 1; i++) {
+                 for (let j = 0; j < arr.length; j++) {
+                     if (arr[j + 1] < arr[j]) {
+                         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+                     }
+
+                 }
+             }
+             return arr;
+
+         }
+
+         let bubbleArr = bubbleSort(arr);
+        //  console.log('冒泡排序', bubbleArr);
+
+         // 2 快速排序
+
+         function quickSort(arr) {
+             let quick = function (arr) {
+                 if (arr.length <= 1) {
+                     return arr;
+                 }
+                 let len = arr.length;
+                 let index = Math.floor(len >> 1);
+                 let pivot = arr.splice(index, 1)[0];
+                 // debugger;
+                 let left = [],
+                     right = [];
+                 for (let i = 0; i < len - 1; i++) {
+
+                     if (arr[i] > pivot) {
+                         right.push(arr[i])
+                     } else {
+                         left.push(arr[i])
+                     }
+                 }
+
+                 return quick(left).concat([pivot], quick(right))
+
+             }
+
+             return quick(arr);
+
+         }
+
+         let quickArr = quickSort(arr);
+        //  console.log('quickArr', quickArr)
+
+         // 插入排序
+         function insertSort(arr) {
+             return arr;
+
+         }
+
+         // 插入排序
+         // 插入排序算法描述的是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入，从而达到排序的效果。
+
+         function insertSort(arr) {
+             console.log(arr);
+             const len = arr.length;
+             let current, prev;
+             for (let i = 1; i < len; i++) {
+                 current = arr[i];
+                 prev = i - 1;
+                 while (prev >= 0 && arr[prev] > current) {
+                     arr[prev + 1] = current;
+                     prev--;
+                 }
+                 arr[prev + 1] = current
+
+             }
+
+             return arr;
+
+         }
+
+
+        //  let insertArr = insertSort(arr);
+
+         // 选择排序
+         // 选择排序是一种简单直观的排序算法。它的工作原理是，首先将最小的元素存放在序列的起始位置，再从剩余未排序元素中继续寻找最小元素，然后放到已排序的序列后面……以此类推，直到所有元素均排序完毕
+         function selectSort(array) {
+             const len = array.length
+             let temp;
+             let minIndex;
+             for (let i = 0; i < len - 1; i++) {
+                 minIndex = i
+                 for (let j = i + 1; j < len; j++) {
+                     if (array[j] <= array[minIndex]) {
+                         minIndex = j
+                     }
+                 }
+                 temp = array[i]
+                 array[i] = array[minIndex]
+                 array[minIndex] = temp
+             }
+             return array
+         }
+
+         //  堆排序
+         // 堆排序是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质，即子结点的键值或索引总是小于（或者大于）它的父节点。堆的底层实际上就是一棵完全二叉树，可以用数组实现。根节点最大的堆叫作大根堆，根节点最小的堆叫作小根堆，你可以根据从大到小排序或者从小到大来排序，分别建立对应的堆就可以
+         function heap_sort(arr) {
+             var len = arr.length
+             var k = 0
+
+             function swap(i, j) {
+                 var temp = arr[i]
+                 arr[i] = arr[j]
+                 arr[j] = temp
+             }
+
+             function max_heapify(start, end) {
+                 var dad = start
+                 var son = dad * 2 + 1
+                 if (son >= end) return
+                 if (son + 1 < end && arr[son] < arr[son + 1]) {
+                     son++
+                 }
+                 if (arr[dad] <= arr[son]) {
+                     swap(dad, son)
+                     max_heapify(son, end)
+                 }
+             }
+             for (var i = Math.floor(len / 2) - 1; i >= 0; i--) {
+                 max_heapify(i, len)
+             }
+
+             for (var j = len - 1; j > k; j--) {
+                 swap(0, j)
+                 max_heapify(0, j)
+             }
+
+             return arr
+         }
+        //  heap_sort(arr);
+
+         //  归并排序
+         // 归并排序是建立在归并操作上的一种有效的排序算法，该算法是采用分治法的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并。
+
+         function mergeSort(array) {
+             const merge = (right, left) => {
+                 const result = []
+                 let il = 0
+                 let ir = 0
+                 while (il < left.length && ir < right.length) {
+                     if (left[il] < right[ir]) {
+                         result.push(left[il++])
+                     } else {
+                         result.push(right[ir++])
+                     }
+                 }
+                 while (il < left.length) {
+                     result.push(left[il++])
+                 }
+                 while (ir < right.length) {
+                     result.push(right[ir++])
+                 }
+                 return result
+             }
+             const mergeSort = array => {
+                 if (array.length === 1) {
+                     return array
+                 }
+                 const mid = Math.floor(array.length / 2)
+                 const left = array.slice(0, mid)
+                 const right = array.slice(mid, array.length)
+                 return merge(mergeSort(left), mergeSort(right))
+             }
+             return mergeSort(array)
+         }
+
+        //  mergeSort(arr);
+
+         // 堆排序
+         const heapSort = array => {
+             console.time('堆排序耗时');
+             // 初始化大顶堆，从第一个非叶子结点开始
+             for (let i = Math.floor(array.length / 2 - 1); i >= 0; i--) {
+                debugger;
+                console.log(array)
+                 heapify(array, i, array.length);
+             }
+             // 排序，每一次 for 循环找出一个当前最大值，数组长度减一
+             for (let i = Math.floor(array.length - 1); i > 0; i--) {
+                 // 根节点与最后一个节点交换
+                 swap(array, 0, i);
+                 // 从根节点开始调整，并且最后一个结点已经为当前最大值，不需要再参与比较，所以第三个参数为 i，即比较到最后一个结点前一个即可
+                 heapify(array, 0, i);
+             }
+             console.timeEnd('堆排序耗时');
+             return array;
+         };
+
+         // 交换两个节点
+         const swap = (array, i, j) => {
+             let temp = array[i];
+             array[i] = array[j];
+             array[j] = temp;
+         };
+
+         // 将 i 结点以下的堆整理为大顶堆，注意这一步实现的基础实际上是：
+         // 假设结点 i 以下的子堆已经是一个大顶堆，heapify 函数实现的
+         // 功能是实际上是：找到 结点 i 在包括结点 i 的堆中的正确位置。
+         // 后面将写一个 for 循环，从第一个非叶子结点开始，对每一个非叶子结点
+         // 都执行 heapify 操作，所以就满足了结点 i 以下的子堆已经是一大顶堆
+         const heapify = (array, i, length) => {
+             let temp = array[i]; // 当前父节点
+             // j < length 的目的是对结点 i 以下的结点全部做顺序调整
+             for (let j = 2 * i + 1; j < length; j = 2 * j + 1) {
+                 temp = array[i]; // 将 array[i] 取出，整个过程相当于找到 array[i] 应处于的位置
+                 if (j + 1 < length && array[j] < array[j + 1]) {
+                     j++; // 找到两个孩子中较大的一个，再与父节点比较
+                 }
+                 if (temp < array[j]) {
+                     swap(array, i, j); // 如果父节点小于子节点:交换；否则跳出
+                     i = j; // 交换后，temp 的下标变为 j
+                 } else {
+                     break;
+                 }
+             }
+         };
+
+         let newArr=[3,5,6,2,1]
+
+         let heapArr=heapSort(newArr);
+        //  console.log('heapArr',heapArr)
+     </script>
+ </body>
+
+ </html>

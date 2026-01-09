@@ -43,8 +43,68 @@
             age: 36
         }
 
+        // getTypes
+
+        function getType(obj) {
+            let type = typeof obj;
+            if (type !== "object") { // 先进行typeof判断，如果是基础数据类型，直接返回
+                return type;
+            }
+            // 对于typeof返回结果是object的，再进行如下的判断，正则返回结果
+            return Object.prototype.toString.call(obj).replace(/^\[object (\S+)\]$/, '$1'); // 注意正则中间有个空格
+        }
+
         // let name = a.getName.call(b);
         // console.log(name)
+
+        function _new(ctor,...args){
+            if(typeof ctor!=='function'){
+                throw 'ctor must be a function'
+            }
+            let obj=new Object();
+            obj.__proto__=Object.create(ctor.prototype);
+            let res=ctor.apply(obj,[...args]);
+            let isObject=typeof res==='object'&&res!==null;
+            let isFunction=typeof res==='function';
+            return isObject||isFunction?res:obj
+        }
+
+        Function.prototype.myCalls=function(context,...args){
+            var context=context||window;
+            context.fn=this;
+            let result=eval(`context.fn(...args)`);
+            delete context.fn
+            return result;
+        }
+
+        let date=new Date();
+
+        let demo={
+            date:'111'
+        }
+
+        function getData(arg){
+            console.log(arg)
+            return this.date
+
+        }
+
+        console.log('mycall 测试')
+
+       let res= getData.myCalls(demo,'测试我的call方法')
+
+       console.log(res);
+
+
+
+
+
+
+
+
+
+
+
 
         Function.prototype.myCall = function (context, ...args) {
             context = context || window;

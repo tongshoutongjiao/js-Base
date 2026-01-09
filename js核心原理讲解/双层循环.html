@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let data = [{
+                name: 11,
+                age: 11,
+                weight: 0.5,
+                children: [{
+                        name: '测试',
+                        age: 222,
+                        weight: 0.4
+                    },
+                    {
+                        name: 'ce',
+                        age: 44,
+                        weight: 0.1
+                    },
+                    {
+                        name: 'cd',
+                        age: 'tet',
+                        weight: 0.5
+                    }
+                ]
+            },
+            {
+                name: 22,
+                age: 22,
+                children: [{
+                        name: 11,
+                        age: 222,
+                        weight: 0.4
+                    },
+                    {
+                        name: 'ce',
+                        age: 44,
+                        weight: 0.1
+                    },
+                    {
+                        name: 'cd',
+                        age: 'tet',
+                        weight: 0.5
+                    }
+                ],
+                weight: 0.2
+            },
+            {
+                name: 33,
+                age: 33,
+                weight: 0.2,
+                children: [{
+                        name: 11,
+                        age: 222,
+                        weight: 0.4
+                    },
+                    {
+                        name: 'ce',
+                        age: 44,
+                        weight: 0.1
+                    },
+                    {
+                        name: 'cd',
+                        age: 'tet',
+                        weight: 0.5
+                    }
+                ],
+            }
+
+        ];
+
+
+        console.log(data);
+
+        function caluate(data){
+            
+            let sum=0;
+            for(let i=0;i<data.length;i++){
+                let cur=data[i];
+                console.log('children',cur)
+                if(cur.children&&cur.children.length){
+                    let res=caluate(cur.children);
+                    if(res!=1){
+                        console.log('curName',cur)
+                        let msg=`指标${cur.name}的权重和不为1，请检查`
+                        return msg; 
+                    }
+                }
+                sum+=cur.weight;
+            }
+            return sum;
+            
+
+        }
+
+       let res= caluate(data);
+
+       if(typeof res=='number'&&res==1){
+        alert('恭喜通过测试')
+       }else if(typeof res==='number'){
+        alert('指标模型的权重和不为1，请检查')
+
+       }else{
+        alert(res)
+       }
+       
+    </script>
+
+</body>
+
+</html>

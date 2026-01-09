@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  实现一个sleep函数
+        // function sleep(time) {
+        //     return new Promise(function (res, rej) {
+        //         setTimeout(() => {
+        //             res()
+
+
+        //         }, time)
+
+        //     })
+
+        // }
+
+        // sleep(1000).then(() => {
+        //     console.log('sleep1')
+        // })
+
+        // // 
+        // function* gen(time) {
+        //     return yield sleep(time)
+
+        // }
+
+        // let g = gen(1500);
+        // g.next().value.then(() => {
+        //     console.log('sleep2')
+        // })
+
+        // //  sleep3 
+
+        // async function sleep3(time) {
+
+        //     await sleep(time)
+
+        // }
+
+        // (async function () {
+        //     await sleep3(2000);
+        //     console.log('sleep3')
+
+        // })()
+
+        async function async1() {
+            console.log('async1 start'); // 2
+            await async2();
+            console.log('async1 end'); // 3
+        }
+        async function async2() {
+            console.log('async2'); // 6
+        }
+        console.log('script start'); // 1 
+        setTimeout(function () {
+            console.log('setTimeout'); // 8
+        }, 0)
+        async1();
+        new Promise(function (resolve) {
+            console.log('promise1'); // 4
+            resolve();
+        }).then(function () {
+            console.log('promise2'); // 7
+        });
+        console.log('script end'); // 5
+
+
+        // console.log(` 1 script start
+        // 2 async1 start
+        // 3 async 2
+
+        // 4 promise1
+        // 5 script end
+        //  6   async1 end
+        // 7 promise2 
+        // 8 setTimeout
+        // `)
+
+        // var b=100;
+
+        // // (function b(){
+        // //     let str= '测试函数生命和变量声明的关系';
+        // //     b=20;
+        // //     console.log(b)
+        // // })()
+
+        // function b(){
+        //     let str= '测试函数生命和变量声明的关系';
+        //     b=20;
+        //     console.log(b)
+        // }
+
+
+        // console.log('变量声明');
+        // console.log(typeof b)
+
+        // var obj = {
+        //     '2': 3,
+        //     '3': 4,
+        //     'length': 2,
+        //     'splice': Array.prototype.splice,
+        //     'push': Array.prototype.push
+        // }
+        // obj.push(1) 
+        // obj.push(2) 
+        // console.log(obj)
+
+        var a = {n: 1};
+        var b = a;
+        a.x = a = {n: 2}; 
+        console.log(a.x) 
+        console.log(b.x)
+        console.log('a',a);
+        console.log('b',b)
+    </script>
+</body>
+
+</html>

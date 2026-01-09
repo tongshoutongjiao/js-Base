@@ -24,8 +24,8 @@
        
     </div>
 
-   
-    <script src="./eventEmitter2.js"></script>
+    <!-- <script src="./eventEmitter.js"></script>Î -->
+    <script src="./观察者.js"></script>Î
     <script>
 
         let eventDemo=new EventEmitter();
@@ -41,15 +41,17 @@
             console.log('吃吃喝喝玩玩',arg)
         })
 
-        // eventDemo.on('dog',function(arg){
-        //     console.log('看家看家看家',arg)
-        // })
+        eventDemo.on('dog',function(arg){
+            console.log('看家看家看家',arg)
+        })
 
-        // eventDemo.on('pig',function(arg){
-        //     console.log('睡觉睡觉睡觉',arg)
-        // })
+        eventDemo.on('pig',function(arg){
+            console.log('睡觉睡觉睡觉',arg)
+        })
 
-
+        eventDemo.emit('cat','喵喵喵')
+        eventDemo.emit('dog','旺旺旺')
+        eventDemo.emit('pig','哼哼哼')
 
 
 

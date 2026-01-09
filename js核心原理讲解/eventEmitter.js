@@ -14,7 +14,7 @@ EventEmitter.prototype.on = function (eventName, listener) {
         throw new TypeError('listener must be a function');
     }
 
-    // 给当前时间的对象赋值
+    // 给当前事件的对象赋值
     let events = this._events;
 
 
@@ -44,8 +44,8 @@ EventEmitter.prototype.emit=function(eventName,args){
     for(let i=0;i<listeners.length;i++){
         let listener=listeners[i];
         if(listener){
-            console.log('传递参数');
-            console.log(args)
+            // console.log('传递参数');
+            // console.log(args)
             listener.listener.apply(this,[args]||[]);
 
             // 给 listener 中 once 为 true 的进行特殊处理

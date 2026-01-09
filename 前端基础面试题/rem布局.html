@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .p1 {
+            font-size: 16px;
+            line-height: 32px;
+        }
+
+        .s1 {
+            font-size: 2em;
+        }
+
+        .s2 {
+            font-size: 2em;
+            line-height: 2em;
+        }
+
+        .p2 {
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .s5 {
+            font-size: 2em;
+        }
+
+        .s6 {
+            font-size: 2em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p1">
+        <div class="s1">1</div>
+        <div class="s2">1</div>
+    </div>
+    <div class="p2">
+        <div class="s5">1</div>
+        <div class="s6">1</div>
+    </div>
+    <script>
+        //  
+        // async function  foo(){
+
+        // const x=await Promise.resolve(100);
+        // console.log(x)
+        // console.log(x);
+
+        // try{
+        //     const y=await Promise.reject(100);
+        // console.log('y')
+
+        // }catch(er){
+        //     console.log('查看错误')
+        //     console.log(er)
+
+        // }
+
+        // }
+
+        // foo()
+
+
+        // function wait(ms=1000,data){
+        //     return new Promise((res,rej)=>{
+        //       return  setTimeout(()=>{
+        //             res(data)
+
+        //         },ms)
+        //     })
+        // }
+
+        // Promise.race([wait(1000,1),wait(2000,2)]).then(function(data){
+        //     console.log('查看promise.all的执行结果')
+        //     console.log(data)
+        // })
+
+        // console.log('fetch');
+        //   const fetchPromise=  fetch('http://www.baidu.com',{
+        //         method:'POST',
+        //         headers:{
+        //             'Content-Type':"application/json"
+        //         },
+        //         credentials:"include",// cookie
+
+
+        //     })
+
+        // async function foo(){
+        //   const resp= await fetch('https:www.baidu.com');
+        //   console.log(resp)
+        // //   const text=await resp.text();
+        // //   console.log(text)
+        // }
+        // foo()
+
+
+        function* gen(x) {
+            var y = yield x + 2;
+            return y;
+        }
+        let g=gen(1);
+
+    </script>
+
+</body>
+
+</html>

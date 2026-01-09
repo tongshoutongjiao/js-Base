@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  Person 类名
+
+        function Person(name) {
+            this.name = name
+            let str = `Hi I am ${this.name}`;
+            console.log(str);
+            this.cbs = [];
+            this.runner()
+        }
+        Person.prototype.runner = function () {
+            Promise.resolve().then(async () => {
+                while (this.cbs.length) {
+                    await this.cbs.shift()()
+                }
+            })
+            return this;
+
+        }
+
+        Person.prototype.sleep = function (time) {
+            this.cbs.push(()=>{
+                return new Promise((res,rej)=>{
+                    setTimeout(() => {
+                        console.log(`等待了${time}秒执行函数`);
+                        res() 
+                    }, time*1000);
+
+                }) 
+            })
+             return this;
+
+        }
+        Person.prototype.eat = function (food) {
+            this.cbs.push(() => {
+                let str = `I am eating ${food}`;
+                console.log(str)
+               return Promise.resolve()
+            })
+            return this;
+        }
+
+        Person.prototype.sleepFirst=function(time){
+            this.cbs.unshift(()=>{
+                return new Promise((res,reg)=>{
+                    setTimeout(()=>{
+                        console.log(`等待了${time}秒中。。。`);
+                        res()
+
+                    },time*1000)
+                })
+            })
+
+
+            return this
+
+
+        }
+
+
+
+
+
+
+
+        function LazyMan(name) {
+            let man = new Person(name);
+            return man;
+        }
+
+        let chain = LazyMan('Tony').eat('lunch').sleep(5).eat('dinner').sleepFirst(2);
+
+
+        console.log(chain)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        div {
+            border: solid 1px red;
+            width: 50px;
+            height: 50px;
+        }
+
+        .float {
+            float: left;
+        }
+    </style>
+    <div>1</div>
+    <div class="float">2</div>
+    <div class="float">3</div>
+    <div>4</div>
+    <div>5</div>
+    <div class="float">6</div>
+    <script>
+        function Foo() {
+            Foo.a = function () {
+                console.log(1)
+            }
+            this.a = function () {
+                console.log(2)
+            }
+        }
+        Foo.prototype.a = function () {
+            console.log(3)
+        }
+        Foo.a = function () {
+            console.log(4)
+        }
+        Foo.a();
+        let obj = new Foo();
+        obj.a();
+        Foo.a();
+
+        function changeObjProperty(o) {
+            o.siteUrl = "http://www.baidu.com"
+            o = new Object()
+            o.siteUrl = "http://www.google.com"
+        }
+        let webSite = new Object();
+        changeObjProperty(webSite);
+        console.log(webSite.siteUrl);
+
+
+        // async function async1() {
+        //     console.log('async1 start');
+        //     await async2();
+        //     console.log('async1 end');
+        // }
+        // async function async2() {
+        //     console.log('async2');
+        // }
+        // console.log('script start');
+        // setTimeout(function () {
+        //     console.log('setTimeout');
+        // }, 0)
+
+        // async1();
+        // new Promise(function (resolve) {
+        //     console.log('promise1');
+        //     resolve();
+        // }).then(function () {
+        //     console.log('promise2');
+        // });
+        // console.log('script end');
+
+
+        //  // script start
+        // async1 start 
+        // async2 
+        // promise1 
+        // script end
+        // async1 end
+        // promise2
+        // setTimeout
+
+        // var a = {
+        //     n: 1
+        // };
+        // var b = a;
+        // a.x = a = {
+        //     n: 2
+        // };
+        // console.log(a, 'a');
+        // console.log(b, 'b')
+        // console.log(a.x) // {n=2}
+        // console.log(b.x) // {undefined}
+
+        // example1
+        // var a = {}, b = '123', c = 123;
+        // a[b] = 'b';
+        // a[c] = 'c';
+        // console.log(a)
+        // console.log(a[b]);
+
+        // example 2
+        // var a = {},
+        //     b = Symbol('123'),
+        //     c = Symbol('123');
+        // a[b] = 'b';
+        // a[c] = 'c';
+        // console.log(a[b]);
+
+        // example 3
+        // var a = {},
+        //     b = {
+        //         key: '123'
+        //     },
+        //     c = {
+        //         key: '456'
+        //     };
+        // a[b] = 'b';
+        // a[c] = 'c';
+        // console.log(a[b], 'demo');
+
+        // function carringAdd(...rest) {
+
+        //     console.log('args');
+        //     console.log(arguments)
+
+
+        //     function add() {
+        //         args = [...rest, [].slice.call(arguments, 0)];
+        //         return add
+        //     }
+        //     add.toString = function () {
+        //         return args.reduce((t, a) => t + +a, 0);
+        //     }
+        //     return add;
+
+        // }
+
+        // function curringAdd() {
+        //     let args = [].slice.call(arguments, 0);
+
+        //     function add() {
+        //         args = [...args, [].slice.call(arguments, 0)];
+        //         return add
+        //     }
+        //     add.toString = function () {
+        //         return args.reduce((t, a) => t + +a, 0);
+        //     }
+        //     return add;
+        // }
+
+        // console.log('carrying code')
+        // console.log(curringAdd(1)(2)(3))
+
+        // Function.prototype.MyCall=function(context,...rest){
+        //     context.fn=this;
+        //    let result= context.fn(...rest);
+        //     delete context.fn;
+        //     return result;  
+        // }
+
+        // let objAry={
+        //     class:'三年二班'
+        // }
+
+        // function fn(year,year2,year3){
+        //     console.log('test');
+        //     this.name='zhl';
+        //     this.age=31;
+        //     this.num1=year;
+        //     this.num2=year2;
+        //     this.num3=year3;
+
+
+        // }
+
+        // fn.MyCall(objAry,1,2,3);
+
+        // Function.prototype.MyApply=function(context,...rest){
+
+        //     context.fn=this;
+        //     let result=context.fn(...rest[0]);
+        //     delete context.fn;
+        //     return result;
+
+
+
+        // }
+
+        // fn.MyApply(objAry,[1,2,3]);
+
+        // console.log(objAry)
+
+        // Function.prototype.MyBind=function (context,...rest){
+
+        //     let arg=[...rest];
+
+        //     return function(){
+        //         let args=[...arg,...[].slice.call(arguments,0)];
+        //         context.MyApply(context,args)
+
+
+        //     }
+
+
+        // }
+
+
+        console.log("script start");
+
+
+
+        setTimeout(() => {
+
+            console.log("setTimeout");
+
+        }, 1000);
+
+
+
+        Promise.resolve()
+
+            .then(function () {
+
+                console.log("promise1");
+
+            })
+
+            .then(function () {
+
+                console.log("promise2");
+
+            });
+
+
+
+        async function errorFunc() {
+
+            try {
+
+                await Promise.reject("error!!!");
+
+            } catch (e) {
+
+                console.log("error caught"); // 微1-3
+
+            }
+
+            console.log("errorFunc");
+
+            return Promise.resolve("errorFunc success");
+
+        }
+
+        errorFunc().then((res) => console.log("errorFunc then res"));
+
+
+
+        console.log("script end");
+    </script>
+</body>
+
+</html>

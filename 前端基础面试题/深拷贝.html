@@ -15,8 +15,6 @@
 //  判断是否是对象或者函数，并且不是null
         const isComplexDataType = obj => (typeof obj === 'object' || typeof obj === 'function') && (obj !== null)
 
-
-
         const deepClone = function (obj, hash = new WeakMap()) {
             if (obj.constructor === Date)
                 return new Date(obj) // 日期对象直接返回一个新的日期对象

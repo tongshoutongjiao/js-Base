@@ -32,24 +32,24 @@
 
             function deep(data) {
                 let result = [];
-             const keys = [...Object.getOwnPropertySymbols(data), ...Object.getOwnPropertyNames(data)];
-                    if (!keys.length) return data;
-                    const exist = map.get(data);
-                    if (exist) {
-                        return exist
-                    }
-                    map.set(data, result);
-                    keys.forEach((key) => {
-                        let item = data[key];
-                        if (typeof item === 'Object' && item) {
-                            result[key] = deep(item)
-                        } else {
-                            result[key] = item;
-                        }
-                    })
-                    return result;
-
+                const keys = [...Object.getOwnPropertySymbols(data), ...Object.getOwnPropertyNames(data)];
+                if (!keys.length) return data;
+                const exist = map.get(data);
+                if (exist) {
+                    return exist
                 }
+                map.set(data, result);
+                keys.forEach((key) => {
+                    let item = data[key];
+                    if (typeof item === 'Object' && item) {
+                        result[key] = deep(item)
+                    } else {
+                        result[key] = item;
+                    }
+                })
+                return result;
+
+            }
 
             return deep(obj)
 
@@ -59,23 +59,50 @@
 
 
 
-  let a={
-      name:'zhl',
-      zhl:{
-          loc:'bj',
-          hobby:'code'
-      }
-  }
-  let b={
-      name:'zxj',
-      age:31,
-      years:2021
-  };
-  a.b=b;
-  b.a=a;
+        let a = {
+            name: 'zhl',
+            zhl: {
+                loc: 'bj',
+                hobby: 'code'
+            }
+        }
+        let b = {
+            name: 'zxj',
+            age: 31,
+            years: 2021
+        };
+        a.b = b;
+        b.a = a;
 
-            let name = clone(a);
-            console.log(name);
+        let name = clone(a);
+        console.log(name);
+
+
+        let splitA = 104545.546787;
+
+        function sep(n) {
+            let [i, c] = n.toString().split(/(\.\d+)/);
+            return i.split('').reverse().map((c, idx) => (idx + 1) % 3 === 0 ? ',' + c : c).reverse().join('').replace(
+                /^,/, '') + c
+        }
+
+        function sep2(n) {
+            let str = n.toString();
+
+            console.log(str.indexOf('.'))
+            str.indexOf('.') < 0 ? str += '.' : void 0;
+
+            console.log('str1')
+
+            console.log(str.replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
+            return str.replace(/(\d)(?=(\d{3})+\.)/g, '$1,').replace(/\.$/, '')
+        }
+
+        let splitB = sep(splitA);
+        let splitC=sep2(2121231)
+
+        console.log('splitB', splitB)
+        console.log('splitC',splitC)
     </script>
 </body>
 

@@ -731,12 +731,108 @@ let obj = {
 // alert(sumSalaries(company))
 
 // 方法一：使用循环
-function sumTo(n){
-  let sum=null;
-  for(let i=0;i<=n;i++){
-    sum+=i
+// function sumTo(n){
+//   let sum=null;
+//   for(let i=0;i<=n;i++){
+//     sum+=i
+//   }
+//   return sum;
+
+// }
+
+// 方式二 使用递归
+// function sumTo(n){
+//   let sum=null;
+//   if(n==1){
+//     return 1;
+//   }
+//   return n+sumTo(n-1)
+
+// }
+
+//  方式三 ：使用等差数列求和公式
+// function sumTo(n){
+//  return n*(n+1)/2
+// }
+// console.log(sumTo(100))
+
+// 阶乘
+// function factorial(n){
+//   if(n==1){return 1}
+//   return n*factorial(n-1)
+// }
+
+// console.log(factorial(5))
+
+// 斐波那契数
+// function fib(n){
+//   if(n==1||n==2){
+//     return 1
+//   }
+//   return fib(n-1)+fib(n-2)
+// }
+
+//  链表
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
   }
-  return sum;
+};
+
+//  循环解法
+// function outPutList(list){
+//   while(list){
+//     console.log(list.value);
+//     list=list.next
+//   }
+
+// }
+
+//  递归解法
+// function outPutList(list){
+//   console.log(list.value)
+//   if(list.next){
+//     outPutList(list.next)
+//   }
+
+// }
+
+
+// outPutList(list)
+function addOne(num){
+  console.log('执行加一')
+  return ++num;
+}
+
+function multplyTen(num){
+  return num*10
 
 }
-console.log(sumTo(4))
+
+function pipe(...funcs){
+  let args=[...funcs]
+  return function(num){
+    let _res=num;
+  return  args.reduce((prev,cur)=>{
+      console.log('查看逻辑');
+      console.log(prev,cur)
+      return cur(prev);
+
+    },_res)
+
+
+  }
+
+}
+
+let res=pipe(multplyTen,addOne)(10);
+console.log('查看res');
+console.log(res)

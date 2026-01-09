@@ -17,6 +17,17 @@
 
 
     <script>
+
+        // Object.assign的用法：
+        let ass={b:1,c:2,d:{e:10}};
+        let target={};
+
+        // Object.assign(target,ass);
+        target={...ass};
+
+        // console.log('target 目标结果');
+        // console.log(target)
+
         let demo = {
             car: {
                 wheel: 4,
@@ -27,35 +38,32 @@
                 energy: 'oil'
             }
         }
+
+
+
+
         // 浅拷贝
         // 方法1 json.stringify 将对象字符串化，同时再对象化 
         // jsonstringify 局限性 
         // 1 拷贝的对象的值中如果有函数、undefined、symbol 这几种类型，经过 JSON.stringify 序列化之后的字符串中这个键值对会消失； 2 拷贝 Date 引用类型会变成字符串；
 
 
-
-
-
-
-
-
-
-
         function shallowCopy(target) {
-            if (typeof target === object && typeof target !== null) {
-                const cloneTarget = Array.isArray(target) ? [] : {};
-                for (let key in target) {
-                    if (target.hasOwnProperity(key)) {
-                        cloneTarget[key] = target[key]
+            if(typeof target=='object'&&target!==null){
+                const cloneTarget=Array.isArray(target)?[]:{};
+                for(let prop in target){
+                    if(target.hasOwnProperity(prop)){
+                        cloneTarget[prop]=target[prop]
                     }
                 }
                 return cloneTarget
-
-            } else {
-                return target
+            }else{
+                return target;
             }
-
         }
+
+
+
 
 
         //  深拷贝
@@ -64,7 +72,7 @@
 
             // 判断传递进来的对象是否是引用对象 
             // 对基础类型做一个最基本的一个拷贝；
-            if (typeof target !== 'object' && target == null) {
+            if (typeof target !== 'object' || target == null) {
                 return target;
             }
 
@@ -117,15 +125,22 @@
         const deepClone = function (obj, hash = new WeakMap()) {
             if (obj.constructor === Date)
                 return new Date(obj) // 日期对象直接返回一个新的日期对象
+
             if (obj.constructor === RegExp)
                 return new RegExp(obj) //正则对象直接返回一个新的正则对象
+
             //如果循环引用了就用 weakMap 来解决
             if (hash.has(obj)) return hash.get(obj)
+
             let allDesc = Object.getOwnPropertyDescriptors(obj)
+
             //遍历传入参数所有键的特性
             let cloneObj = Object.create(Object.getPrototypeOf(obj), allDesc)
+
             //继承原型链
             hash.set(obj, cloneObj)
+            
+
             for (let key of Reflect.ownKeys(obj)) {
                 cloneObj[key] = (isComplexDataType(obj[key]) && typeof obj[key] !== 'function') ? deepClone(obj[ key], hash) : obj[key]
             }

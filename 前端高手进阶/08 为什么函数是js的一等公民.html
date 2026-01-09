@@ -51,20 +51,25 @@
         // add(1, 2)(3, 4, 5)(6) // 21
         //  支持多个参数以及多次调用求和
 
-        // function add(...args) {
-        //     let arr = args;
+        function add(...args) {
+            let arr = args;
 
-        //     function fn(...newArgs) {
-        //         arr = [...arr, ...newArgs];
-        //         return fn;
-        //     }
-        //     fn.toString = fn.valueOf = function () {
-        //         return arr.reduce((acc, cur) => acc + parseInt(cur))
-        //     }
-        //     return fn;
-        // }
+            function fn(...newArgs) {
+                arr = [...arr, ...newArgs];
+            //   return arr.reduce((acc, cur) => acc + parseInt(cur));
+                return fn;
+            }
+            fn.toString = fn.valueOf = function () {
 
-        // add(1, 2, 3, 4);
+                // console.log('测试测试测试')
+                // let sum=0
+                //  arr.reduce((acc, cur) => acc + parseInt(cur),sum);
+                //  return sum;
+            }
+            return fn;
+        }
+
+        add(1, 2, 3, 4);
 
 
 
@@ -102,6 +107,21 @@
         let s2=new SingleStudent();
         console.log('查看当前单例模式')
         console.log(s==s2)
+
+
+        function testFn(){
+
+        }
+        testFn.toString=function(){
+            console.log('testFn 的 tosTRING 形式x')
+        }
+
+        let testObj={
+            name:'测试',
+            toString(){
+                console.log('ceshi ')
+            }
+        }
 
 
 

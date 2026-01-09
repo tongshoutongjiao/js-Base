@@ -74,6 +74,7 @@
         Child3.prototype = new Parent3();
         // 手动挂上构造器，指向自己的构造函数
         Child3.prototype.constructor = Child3;
+
         var s3 = new Child3();
         var s4 = new Child3();
         s3.play.push(4);
@@ -104,6 +105,7 @@
         console.log(person5.friends);
 
         // 5 第五种：寄生式继承
+        
 
 
         //  6 第六种 寄生组合式继承 （利用Object.create(),让子类的原型指向父类的原型，同时利用call函数将父级的私有属性作为自己的）
